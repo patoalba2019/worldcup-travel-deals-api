@@ -9,6 +9,14 @@ info:
     candidates, and transparent deal scoring.
 servers:
   - url: https://worldcup-travel-deals-api.onrender.com
+components:
+  securitySchemes:
+    PaidGatewaySecret:
+      type: apiKey
+      in: header
+      name: X-RapidAPI-Proxy-Secret
+security:
+  - PaidGatewaySecret: []
 tags:
   - name: Travel Deals
   - name: Host Cities
