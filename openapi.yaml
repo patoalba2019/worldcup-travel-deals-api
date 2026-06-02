@@ -1,0 +1,167 @@
+openapi: 3.0.3
+info:
+  title: WorldCupTravelDealsAPI
+  version: 1.0.0
+  description: >
+    FIFA World Cup 2026 travel deal intelligence API for agencies, apps,
+    newsletters, no-code builders, and AI agents. Includes host-city data,
+    safe official ticketing links, flight and hotel search routes, package
+    candidates, and transparent deal scoring.
+servers:
+  - url: https://worldcup-travel-deals-api.onrender.com
+tags:
+  - name: Travel Deals
+  - name: Host Cities
+  - name: Safety
+  - name: Metadata
+paths:
+  /:
+    get:
+      tags: [Metadata]
+      summary: API overview
+      responses:
+        "200":
+          description: API overview
+  /health:
+    get:
+      tags: [Metadata]
+      summary: Health status
+      responses:
+        "200":
+          description: Runtime health and provider readiness
+  /cities:
+    get:
+      tags: [Host Cities]
+      summary: List World Cup 2026 host cities
+      parameters:
+        - in: query
+          name: region
+          schema:
+            type: string
+            enum: [USA, Mexico, Canada]
+      responses:
+        "200":
+          description: Host cities
+  /cities/{slug}:
+    get:
+      tags: [Host Cities]
+      summary: Get host city detail, baseline, and travel links
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: origin
+          schema:
+            type: string
+            example: EZE
+        - in: query
+          name: start
+          schema:
+            type: string
+            format: date
+            example: "2026-06-15"
+        - in: query
+          name: end
+          schema:
+            type: string
+            format: date
+            example: "2026-06-21"
+        - in: query
+          name: nights
+          schema:
+            type: integer
+            default: 4
+        - in: query
+          name: travelers
+          schema:
+            type: integer
+            default: 2
+      responses:
+        "200":
+          description: Host city detail
+        "404":
+          description: Unknown city
+  /deals/search:
+    get:
+      tags: [Travel Deals]
+      summary: Generate package search candidates and deal scores
+      parameters:
+        - in: query
+          name: origin
+          schema:
+            type: string
+            default: EZE
+        - in: query
+          name: city
+          schema:
+            type: string
+            default: miami
+        - in: query
+          name: start
+          schema:
+            type: string
+            format: date
+        - in: query
+          name: end
+          schema:
+            type: string
+            format: date
+        - in: query
+          name: nights
+          schema:
+            type: integer
+            default: 5
+        - in: query
+          name: travelers
+          schema:
+            type: integer
+            default: 2
+        - in: query
+          name: budget
+          description: Optional known package budget in USD to score against baseline.
+          schema:
+            type: number
+      responses:
+        "200":
+          description: Package candidates
+  /score:
+    get:
+      tags: [Travel Deals]
+      summary: Score a real offer against a baseline
+      parameters:
+        - in: query
+          name: price
+          required: true
+          schema:
+            type: number
+        - in: query
+          name: baseline
+          required: true
+          schema:
+            type: number
+        - in: query
+          name: safety
+          schema:
+            type: string
+            enum: [official, official_or_direct, provider_verified, unknown]
+            default: official_or_direct
+      responses:
+        "200":
+          description: Deal score
+  /official-links:
+    get:
+      tags: [Safety]
+      summary: Official ticketing and hospitality links
+      responses:
+        "200":
+          description: Official FIFA ticketing safety links
+  /pricing-recommendation:
+    get:
+      tags: [Metadata]
+      summary: Suggested RapidAPI pricing plans
+      responses:
+        "200":
+          description: Pricing recommendation
