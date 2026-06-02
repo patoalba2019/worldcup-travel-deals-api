@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: worldcup-travel-deals-api
+    runtime: python
+    plan: starter
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn server:app
+    envVars:
+      - key: REQUIRE_PAID_GATEWAY
+        value: "true"
+      - key: PAID_GATEWAY_SECRET
+        generateValue: true
