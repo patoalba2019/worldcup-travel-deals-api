@@ -40,6 +40,17 @@ world-cup-2026, travel-api, flight-deals, hotel-deals, tourism, fifa, sports-tra
 - Business: USD 149/month, 100,000 requests/month.
 - Enterprise: USD 399/month, custom.
 
+Do not create a free public plan. If RapidAPI requires a testing path, keep it internal/private or use a very small paid Basic plan.
+
+## Production Security
+
+Set the backend environment variables:
+
+- `REQUIRE_PAID_GATEWAY=true`
+- `PAID_GATEWAY_SECRET=<strong-shared-secret>`
+
+Configure RapidAPI to send that secret as `X-RapidAPI-Proxy-Secret` or `X-API-Gateway-Secret`. This prevents direct backend use outside the paid marketplace.
+
 ## Suggested Endpoint Highlights
 
 - `/deals/search`: Generate World Cup travel package candidates with safe booking links and deal scores.

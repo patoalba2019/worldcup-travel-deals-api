@@ -41,6 +41,17 @@ The API works without private keys. If provider credentials become available, it
 
 Without these keys, responses clearly mark provider inventory as disabled and return safe official links plus deal-intelligence search candidates.
 
+## Paid-Only Gateway Protection
+
+For production, set:
+
+```bash
+REQUIRE_PAID_GATEWAY=true
+PAID_GATEWAY_SECRET=<strong-shared-secret>
+```
+
+Then configure RapidAPI to send the same value as `X-RapidAPI-Proxy-Secret` or `X-API-Gateway-Secret`. Direct backend calls without that secret receive `402 Payment Required`.
+
 ## RapidAPI Pricing Suggestion
 
 - **Basic**: USD 19/month, 2,500 requests/month.

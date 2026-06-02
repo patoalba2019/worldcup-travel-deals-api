@@ -291,6 +291,33 @@ def add_cors_headers(response):
     return response
 
 
+@app.before_request
+def enforce_paid_gateway():
+    if request.method == "OPTIONS":
+        return None
+    if os.getenv("REQUIRE_PAID_GATEWAY", "false").lower() not in {"1", "true", "yes"}:
+        return None
+    expected = os.getenv("PAID_GATEWAY_SECRET")
+    if not expected:
+        return jsonify({"error": "Paid gateway is required but not configured."}), 503
+    provided = (
+        request.headers.get("X-RapidAPI-Proxy-Secret")
+        or request.headers.get("X-API-Gateway-Secret")
+        or request.headers.get("X-WorldCupTravelDeals-Secret")
+    )
+    if provided != expected:
+        return (
+            jsonify(
+                {
+                    "error": "Access denied. Subscribe through the authorized API marketplace to use this API.",
+                    "marketplace": "RapidAPI",
+                }
+            ),
+            402,
+        )
+    return None
+
+
 def parse_date(value: str | None, default: date) -> date:
     if not value:
         return default
