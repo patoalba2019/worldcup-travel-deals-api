@@ -1,3 +1,4 @@
+import os
 import unittest
 
 from server import app
@@ -6,6 +7,10 @@ from server import app
 class WorldCupTravelDealsApiTest(unittest.TestCase):
     def setUp(self):
         self.client = app.test_client()
+
+    def tearDown(self):
+        os.environ.pop("REQUIRE_PAID_GATEWAY", None)
+        os.environ.pop("PAID_GATEWAY_SECRET", None)
 
     def test_health(self):
         response = self.client.get("/health")
@@ -27,12 +32,25 @@ class WorldCupTravelDealsApiTest(unittest.TestCase):
         data = response.get_json()
         self.assertEqual(len(data["results"]), 3)
         self.assertIn("deal_score", data["results"][0])
+        self.assertFalse(data["results"][0]["is_live_offer"])
+        self.assertFalse(data["inventory_disclosure"]["contains_live_fares"])
 
     def test_score(self):
         response = self.client.get("/score?price=900&baseline=1200&safety=official")
         self.assertEqual(response.status_code, 200)
         data = response.get_json()
         self.assertGreater(data["deal_score"]["score"], 70)
+
+    def test_paid_gateway_blocks_product_data_but_keeps_health_public(self):
+        os.environ["REQUIRE_PAID_GATEWAY"] = "true"
+        os.environ["PAID_GATEWAY_SECRET"] = "market-secret"
+
+        self.assertEqual(self.client.get("/health").status_code, 200)
+        self.assertEqual(self.client.get("/cities").status_code, 402)
+        self.assertEqual(
+            self.client.get("/cities", headers={"X-API-Gateway-Secret": "market-secret"}).status_code,
+            200,
+        )
 
 
 if __name__ == "__main__":

@@ -31,15 +31,16 @@ The API is designed to be safe and sellable on RapidAPI: ticket links point to o
 curl "https://your-domain.example/deals/search?origin=EZE&city=miami&start=2026-06-15&nights=5&travelers=2"
 ```
 
-## Optional Live Providers
+## Inventory Disclosure
 
-The API works without private keys. If provider credentials become available, it is ready to expose live inventory:
+The current version provides structured planning data, provider search links,
+heuristic reference estimates, and scoring for real offers supplied by the
+buyer. It does **not** return live flight fares, hotel availability, or ticket
+inventory.
 
-- `AMADEUS_CLIENT_ID` + `AMADEUS_CLIENT_SECRET`
-- `TRAVELPAYOUTS_TOKEN`
-- `HOTELBEDS_API_KEY` + `HOTELBEDS_SECRET`
-
-Without these keys, responses clearly mark provider inventory as disabled and return safe official links plus deal-intelligence search candidates.
+Responses include an `inventory_disclosure` object and mark generated package
+candidates with `is_live_offer: false`. Provider integrations can be added in a
+future version after approved credentials and implementation are available.
 
 ## Paid-Only Gateway Protection
 
@@ -54,12 +55,13 @@ Then configure RapidAPI to send the same value as `X-RapidAPI-Proxy-Secret` or `
 
 ## RapidAPI Pricing Suggestion
 
-- **Basic**: USD 19/month, 2,500 requests/month.
-- **Pro**: USD 59/month, 20,000 requests/month.
-- **Ultra**: USD 149/month, 90,000 requests/month.
-- **Mega**: USD 399/month, 200,000 requests/month.
+- **Basic evaluation**: USD 0, 25 requests/month hard limit.
+- **Pro**: USD 9.99/month, 10,000 requests/month.
+- **Ultra**: USD 29/month, 50,000 requests/month.
+- **Mega**: USD 79/month, 200,000 requests/month.
 
-Use paid-only RapidAPI plans. Do not expose a public free tier; direct backend access is blocked by the paid gateway secret.
+The Basic quota only allows a buyer to verify integration. Direct backend
+access remains blocked by the paid gateway secret.
 
 ## Safety Positioning
 

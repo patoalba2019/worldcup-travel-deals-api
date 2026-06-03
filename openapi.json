@@ -2,8 +2,8 @@
   "openapi": "3.0.3",
   "info": {
     "title": "WorldCupTravelDealsAPI",
-    "version": "1.0.0",
-    "description": "FIFA World Cup 2026 travel deal intelligence API for agencies, apps, newsletters, no-code builders, and AI agents. Includes host-city data, safe official ticketing links, flight and hotel search routes, package candidates, and transparent deal scoring."
+    "version": "1.1.0",
+    "description": "FIFA World Cup 2026 travel planning and deal-scoring API for agencies, apps, newsletters, no-code builders, and AI agents. Includes host-city data, safe official ticketing links, flight and hotel search routes, heuristic package references, and transparent scoring for real offers supplied by the buyer. This version does not return live fare, hotel, or ticket inventory.\n"
   },
   "servers": [
     {
@@ -41,7 +41,9 @@
   "paths": {
     "/": {
       "get": {
-        "tags": ["Metadata"],
+        "tags": [
+          "Metadata"
+        ],
         "summary": "API overview",
         "responses": {
           "200": {
@@ -52,8 +54,11 @@
     },
     "/health": {
       "get": {
-        "tags": ["Metadata"],
+        "tags": [
+          "Metadata"
+        ],
         "summary": "Health status",
+        "security": [],
         "responses": {
           "200": {
             "description": "Runtime health and provider readiness"
@@ -63,7 +68,9 @@
     },
     "/cities": {
       "get": {
-        "tags": ["Host Cities"],
+        "tags": [
+          "Host Cities"
+        ],
         "summary": "List World Cup 2026 host cities",
         "parameters": [
           {
@@ -71,7 +78,11 @@
             "name": "region",
             "schema": {
               "type": "string",
-              "enum": ["USA", "Mexico", "Canada"]
+              "enum": [
+                "USA",
+                "Mexico",
+                "Canada"
+              ]
             }
           }
         ],
@@ -84,7 +95,9 @@
     },
     "/cities/{slug}": {
       "get": {
-        "tags": ["Host Cities"],
+        "tags": [
+          "Host Cities"
+        ],
         "summary": "Get host city detail, baseline, and travel links",
         "parameters": [
           {
@@ -150,8 +163,10 @@
     },
     "/deals/search": {
       "get": {
-        "tags": ["Travel Deals"],
-        "summary": "Generate package search candidates and deal scores",
+        "tags": [
+          "Travel Deals"
+        ],
+        "summary": "Generate planning candidates, reference estimates, and provider search links",
         "parameters": [
           {
             "in": "query",
@@ -219,7 +234,9 @@
     },
     "/score": {
       "get": {
-        "tags": ["Travel Deals"],
+        "tags": [
+          "Travel Deals"
+        ],
         "summary": "Score a real offer against a baseline",
         "parameters": [
           {
@@ -243,7 +260,12 @@
             "name": "safety",
             "schema": {
               "type": "string",
-              "enum": ["official", "official_or_direct", "provider_verified", "unknown"],
+              "enum": [
+                "official",
+                "official_or_direct",
+                "provider_verified",
+                "unknown"
+              ],
               "default": "official_or_direct"
             }
           }
@@ -257,7 +279,9 @@
     },
     "/official-links": {
       "get": {
-        "tags": ["Safety"],
+        "tags": [
+          "Safety"
+        ],
         "summary": "Official ticketing and hospitality links",
         "responses": {
           "200": {
@@ -268,7 +292,9 @@
     },
     "/pricing-recommendation": {
       "get": {
-        "tags": ["Metadata"],
+        "tags": [
+          "Metadata"
+        ],
         "summary": "Suggested RapidAPI pricing plans",
         "responses": {
           "200": {

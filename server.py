@@ -9,7 +9,7 @@ from flask import Flask, jsonify, request
 
 
 API_NAME = "WorldCupTravelDealsAPI"
-API_VERSION = "1.0.0"
+API_VERSION = "1.1.0"
 OFFICIAL_TICKET_URL = "https://www.fifa.com/tickets"
 OFFICIAL_HOSPITALITY_URL = "https://fifaworldcup26.hospitalityexperiences.fifa.com/"
 OFFICIAL_RESALE_HELP_URL = (
@@ -293,7 +293,7 @@ def add_cors_headers(response):
 
 @app.before_request
 def enforce_paid_gateway():
-    if request.method == "OPTIONS":
+    if request.method == "OPTIONS" or request.path == "/health":
         return None
     if os.getenv("REQUIRE_PAID_GATEWAY", "false").lower() not in {"1", "true", "yes"}:
         return None
@@ -431,20 +431,40 @@ def deal_score(price: float, baseline: float, safety: str = "official_or_direct"
     }
 
 
-def live_provider_status() -> dict:
+def provider_readiness() -> dict:
     return {
         "amadeus": {
-            "enabled": bool(os.getenv("AMADEUS_CLIENT_ID") and os.getenv("AMADEUS_CLIENT_SECRET")),
+            "credentials_detected": bool(
+                os.getenv("AMADEUS_CLIENT_ID") and os.getenv("AMADEUS_CLIENT_SECRET")
+            ),
             "capability": "flight_price_search",
+            "integration_status": "not_implemented",
         },
         "travelpayouts": {
-            "enabled": bool(os.getenv("TRAVELPAYOUTS_TOKEN")),
+            "credentials_detected": bool(os.getenv("TRAVELPAYOUTS_TOKEN")),
             "capability": "flight_calendar_prices",
+            "integration_status": "not_implemented",
         },
         "hotelbeds": {
-            "enabled": bool(os.getenv("HOTELBEDS_API_KEY") and os.getenv("HOTELBEDS_SECRET")),
+            "credentials_detected": bool(
+                os.getenv("HOTELBEDS_API_KEY") and os.getenv("HOTELBEDS_SECRET")
+            ),
             "capability": "hotel_availability",
+            "integration_status": "not_implemented",
         },
+    }
+
+
+def inventory_disclosure() -> dict:
+    return {
+        "mode": "planning_links_and_heuristic_baselines",
+        "contains_live_fares": False,
+        "contains_live_hotel_availability": False,
+        "provider_readiness": provider_readiness(),
+        "notice": (
+            "This version generates provider search links and heuristic reference estimates. "
+            "It does not return live flight fares, hotel availability, or ticket inventory."
+        ),
     }
 
 
@@ -460,6 +480,7 @@ def index():
             "api": API_NAME,
             "version": API_VERSION,
             "positioning": "World Cup 2026 travel deal intelligence for agencies, apps, newsletters, and AI agents.",
+            "inventory_disclosure": inventory_disclosure(),
             "endpoints": {
                 "health": "/health",
                 "cities": "/cities",
@@ -487,7 +508,7 @@ def health():
             "api": API_NAME,
             "version": API_VERSION,
             "host_city_count": len(HOST_CITIES),
-            "live_providers": live_provider_status(),
+            "inventory_disclosure": inventory_disclosure(),
             "generated_at": datetime.now(UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
         }
     )
@@ -517,6 +538,7 @@ def city_detail(slug: str):
             "city": city,
             "baseline": city_baseline(city, nights=nights, travelers=travelers, origin=origin),
             "search_links": build_search_links(city, origin or "ANY", start, end, travelers),
+            "inventory_disclosure": inventory_disclosure(),
             "safety_notes": safety_notes(),
         }
     )
@@ -573,6 +595,8 @@ def search_deals():
                 "end": shifted_end.isoformat(),
                 "travelers": travelers,
                 "estimated_reference_price": money(price),
+                "pricing_type": "heuristic_reference",
+                "is_live_offer": False,
                 "deal_score": deal_score(price, baseline["estimated_total"], "official_or_direct"),
                 "links": build_search_links(city, origin, shifted_start, shifted_end, travelers),
             }
@@ -589,10 +613,13 @@ def search_deals():
                 "nights": nights,
                 "budget": budget_value,
             },
-            "live_providers": live_provider_status(),
+            "inventory_disclosure": inventory_disclosure(),
             "baseline": baseline,
             "results": suggestions,
-            "disclaimer": "Results are deal-intelligence search candidates. Configure provider API keys for live fare/hotel inventory.",
+            "disclaimer": (
+                "Results are planning candidates and heuristic reference estimates, not live offers. "
+                "Open the provider search links or supply a real offer to /score before making a purchase decision."
+            ),
             "safety_notes": safety_notes(),
         }
     )
@@ -613,30 +640,33 @@ def pricing_recommendation():
             "rapidapi_plans": [
                 {
                     "name": "Basic",
-                    "price_usd_monthly": 19,
-                    "quota": "2,500 requests/month",
-                    "buyer": "small newsletters, indie apps, no-code builders",
+                    "price_usd_monthly": 0,
+                    "quota": "25 requests/month hard limit",
+                    "buyer": "integration evaluation only",
                 },
                 {
                     "name": "Pro",
-                    "price_usd_monthly": 59,
-                    "quota": "20,000 requests/month",
-                    "buyer": "travel agencies, job/event boards, content sites",
+                    "price_usd_monthly": 9.99,
+                    "quota": "10,000 requests/month",
+                    "buyer": "small newsletters, indie apps, no-code builders",
                 },
                 {
                     "name": "Ultra",
-                    "price_usd_monthly": 149,
-                    "quota": "90,000 requests/month",
-                    "buyer": "agencies, AI assistants, tourism marketplaces",
+                    "price_usd_monthly": 29,
+                    "quota": "50,000 requests/month",
+                    "buyer": "agencies, AI assistants, tourism products",
                 },
                 {
                     "name": "Mega",
-                    "price_usd_monthly": 399,
+                    "price_usd_monthly": 79,
                     "quota": "200,000 requests/month",
                     "buyer": "high-volume travel products and affiliate networks",
                 },
             ],
-            "note": "Use paid-only RapidAPI plans. Do not expose a public free tier; direct backend access is blocked by the paid gateway secret.",
+            "note": (
+                "Keep the Basic plan small enough for integration evaluation only. "
+                "Direct backend access remains blocked by the paid gateway secret."
+            ),
         }
     )
 

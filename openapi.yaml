@@ -1,12 +1,14 @@
 openapi: 3.0.3
 info:
   title: WorldCupTravelDealsAPI
-  version: 1.0.0
+  version: 1.1.0
   description: >
-    FIFA World Cup 2026 travel deal intelligence API for agencies, apps,
-    newsletters, no-code builders, and AI agents. Includes host-city data,
-    safe official ticketing links, flight and hotel search routes, package
-    candidates, and transparent deal scoring.
+    FIFA World Cup 2026 travel planning and deal-scoring API for agencies,
+    apps, newsletters, no-code builders, and AI agents. Includes host-city
+    data, safe official ticketing links, flight and hotel search routes,
+    heuristic package references, and transparent scoring for real offers
+    supplied by the buyer. This version does not return live fare, hotel, or
+    ticket inventory.
 servers:
   - url: https://worldcup-travel-deals-api.onrender.com
 components:
@@ -34,6 +36,7 @@ paths:
     get:
       tags: [Metadata]
       summary: Health status
+      security: []
       responses:
         "200":
           description: Runtime health and provider readiness
@@ -95,7 +98,7 @@ paths:
   /deals/search:
     get:
       tags: [Travel Deals]
-      summary: Generate package search candidates and deal scores
+      summary: Generate planning candidates, reference estimates, and provider search links
       parameters:
         - in: query
           name: origin
