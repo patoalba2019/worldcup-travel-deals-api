@@ -37,10 +37,10 @@ world-cup-2026, travel-api, flight-deals, hotel-deals, tourism, fifa, sports-tra
 
 - Basic: USD 19/month, 2,500 requests/month.
 - Pro: USD 59/month, 20,000 requests/month.
-- Business: USD 149/month, 100,000 requests/month.
-- Enterprise: USD 399/month, custom.
+- Ultra: USD 149/month, 90,000 requests/month.
+- Mega: USD 399/month, 200,000 requests/month.
 
-Do not create a free public plan. If RapidAPI requires a testing path, keep it internal/private or use a very small paid Basic plan.
+Do not create a free public plan. Keep all public plans paid-only.
 
 ## Production Security
 

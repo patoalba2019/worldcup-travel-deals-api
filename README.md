@@ -56,8 +56,8 @@ Then configure RapidAPI to send the same value as `X-RapidAPI-Proxy-Secret` or `
 
 - **Basic**: USD 19/month, 2,500 requests/month.
 - **Pro**: USD 59/month, 20,000 requests/month.
-- **Business**: USD 149/month, 100,000 requests/month.
-- **Enterprise**: USD 399/month, custom.
+- **Ultra**: USD 149/month, 90,000 requests/month.
+- **Mega**: USD 399/month, 200,000 requests/month.
 
 Use paid-only RapidAPI plans. Do not expose a public free tier; direct backend access is blocked by the paid gateway secret.
 
