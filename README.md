@@ -59,7 +59,7 @@ Then configure RapidAPI to send the same value as `X-RapidAPI-Proxy-Secret` or `
 - **Business**: USD 149/month, 100,000 requests/month.
 - **Enterprise**: USD 399/month, custom.
 
-Keep a small free test tier if RapidAPI allows it, then monetize real usage through Pro and Business.
+Use paid-only RapidAPI plans. Do not expose a public free tier; direct backend access is blocked by the paid gateway secret.
 
 ## Safety Positioning
 

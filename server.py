@@ -636,7 +636,7 @@ def pricing_recommendation():
                     "buyer": "high-volume travel products and affiliate networks",
                 },
             ],
-            "note": "Keep a small free test tier on RapidAPI if possible, then monetize real usage with Pro and Business.",
+            "note": "Use paid-only RapidAPI plans. Do not expose a public free tier; direct backend access is blocked by the paid gateway secret.",
         }
     )
 
