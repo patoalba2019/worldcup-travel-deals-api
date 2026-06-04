@@ -1,8 +1,10 @@
 # WorldCupTravelDealsAPI
 
+![WorldCupTravelDealsAPI logo](assets/worldcup-travel-deals-logo-500.png)
+
 WorldCupTravelDealsAPI is a professional travel-intelligence API for FIFA World Cup 2026 tourism products. It helps travel agencies, deal newsletters, no-code builders, AI agents, and event-tourism apps discover host-city opportunities, build safe booking routes, compare packages, and score whether a flight + hotel offer is actually attractive.
 
-The API is designed to be safe and sellable on RapidAPI: ticket links point to official FIFA channels, travel searches are structured as outbound provider searches, and optional provider keys can be added later for live flight/hotel inventory.
+The API is designed to be safe and sellable on RapidAPI: ticket links point to official FIFA channels, travel searches are structured as outbound provider searches, and every response clearly discloses that the current version does not return live flight, hotel, or ticket inventory.
 
 ## What It Does
 
