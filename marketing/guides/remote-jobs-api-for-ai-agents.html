@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Remote Jobs API for AI Agents and Recruiting Automation</title>
+    <meta name="description" content="How AI agents and recruiting automation use normalized remote job listings, source attribution, freshness metadata, search, filters, and pagination.">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://patoapis-paid-apis.onrender.com/guides/remote-jobs-api-for-ai-agents.html">
+    <link rel="stylesheet" href="../styles.css">
+    <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+    <script src="../app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="../index.html" aria-label="patoapis home"><span class="brand-mark">p</span><span>patoapis</span></a>
+      <nav aria-label="Primary navigation"><a href="../remote-jobs-api.html">RemoteJobsAPI</a><a href="../index.html#pricing">Pricing</a><a href="../index.html#faq">FAQ</a></nav>
+      <a class="header-cta" href="https://rapidapi.com/patoalba2019/api/remotejobsapi?utm_source=patoapis_site&utm_medium=referral&utm_campaign=remotejobs_ai_guide">Subscribe<i data-lucide="external-link"></i></a>
+    </header>
+    <main class="guide-main">
+      <section class="guide-hero"><div class="guide-hero-inner"><p class="eyebrow">RemoteJobsAPI buyer guide</p><h1>Remote jobs data for AI agents and recruiting automation</h1><p>Reliable automation starts with a predictable contract, visible freshness, and an original application URL for every job.</p></div></section>
+      <article class="guide-article">
+        <h2>Why normalized job data matters</h2>
+        <p>Different job feeds use different field names, date formats, categories, and location structures. RemoteJobsAPI turns Jobicy and Himalayas listings into one contract so your agent can focus on matching, summarizing, routing, and alerts.</p>
+        <h2>Useful AI-agent workflows</h2>
+        <ul><li>Daily role matching by skill and candidate region.</li><li>Recruiting dashboards grouped by company, category, or source.</li><li>Job-alert newsletters that preserve source attribution.</li><li>Research agents measuring hiring demand without maintaining feed parsers.</li></ul>
+        <h2>Recommended request pattern</h2>
+        <pre><code>GET /jobs?q=python&amp;location=latam&amp;limit=25&amp;sort=newest</code></pre>
+        <p>Use the response metadata to communicate snapshot freshness. Fetch full job details only after a user or agent selects a listing.</p>
+        <h2>Commercial access</h2>
+        <p>Plans begin at $4.99 per month through RapidAPI. Product endpoints reject direct backend requests without the private marketplace gateway.</p>
+        <div class="guide-cta"><a class="button primary" href="https://rapidapi.com/patoalba2019/api/remotejobsapi?utm_source=patoapis_site&utm_medium=referral&utm_campaign=remotejobs_ai_guide" target="_blank" rel="noopener noreferrer">Review RemoteJobsAPI<i data-lucide="external-link"></i></a><a class="button product-button jobs-button" href="../remote-jobs-api.html">Product details</a></div>
+      </article>
+    </main>
+  </body>
+</html>
