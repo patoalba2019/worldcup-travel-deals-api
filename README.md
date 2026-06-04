@@ -2,6 +2,13 @@
 
 ![WorldCupTravelDealsAPI logo](assets/worldcup-travel-deals-logo-500.png)
 
+[Subscribe on RapidAPI](https://rapidapi.com/patoalba2019/api/worldcuptraveldealsapi?utm_source=github&utm_medium=repository&utm_campaign=worldcup_readme) |
+[View product details](https://patoapis-paid-apis.onrender.com/world-cup-travel-api.html?utm_source=github&utm_medium=repository&utm_campaign=worldcup_readme)
+
+> Commercial API access is paid and delivered through RapidAPI. The direct
+> production backend rejects requests that do not carry the private marketplace
+> gateway credential.
+
 WorldCupTravelDealsAPI is a professional travel-intelligence API for FIFA World Cup 2026 tourism products. It helps travel agencies, deal newsletters, no-code builders, AI agents, and event-tourism apps discover host-city opportunities, build safe booking routes, compare packages, and score whether a flight + hotel offer is actually attractive.
 
 The API is designed to be safe and sellable on RapidAPI: ticket links point to official FIFA channels, travel searches are structured as outbound provider searches, and every response clearly discloses that the current version does not return live flight, hotel, or ticket inventory.
@@ -92,3 +99,4 @@ python3 -m unittest discover -s tests
 ## License
 
 Proprietary software. All rights reserved. See [LICENSE](LICENSE).
+Access to the hosted API requires an active paid RapidAPI subscription.
