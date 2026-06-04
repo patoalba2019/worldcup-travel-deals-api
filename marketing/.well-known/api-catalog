@@ -1,0 +1,58 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://remotejobsapi.p.rapidapi.com",
+      "service-desc": [
+        {
+          "href": "https://patoapis-paid-apis.onrender.com/specs/remotejobs-openapi.json",
+          "type": "application/vnd.oai.openapi+json;version=3.0"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://patoapis-paid-apis.onrender.com/remote-jobs-api.html",
+          "type": "text/html"
+        }
+      ],
+      "service-meta": [
+        {
+          "href": "https://patoapis-paid-apis.onrender.com/apis.json",
+          "type": "application/json"
+        }
+      ],
+      "status": [
+        {
+          "href": "https://patoapis-remotejobs-api.onrender.com/health",
+          "type": "application/json"
+        }
+      ]
+    },
+    {
+      "anchor": "https://worldcuptraveldealsapi.p.rapidapi.com",
+      "service-desc": [
+        {
+          "href": "https://patoapis-paid-apis.onrender.com/specs/worldcup-openapi.json",
+          "type": "application/vnd.oai.openapi+json;version=3.0"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://patoapis-paid-apis.onrender.com/world-cup-travel-api.html",
+          "type": "text/html"
+        }
+      ],
+      "service-meta": [
+        {
+          "href": "https://patoapis-paid-apis.onrender.com/apis.json",
+          "type": "application/json"
+        }
+      ],
+      "status": [
+        {
+          "href": "https://worldcup-travel-deals-api.onrender.com/health",
+          "type": "application/json"
+        }
+      ]
+    }
+  ]
+}

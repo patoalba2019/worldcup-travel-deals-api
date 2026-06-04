@@ -1,0 +1,423 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "WorldCupTravelDealsAPI",
+    "version": "1.2.0",
+    "description": "FIFA World Cup 2026 travel planning and deal-scoring API for agencies, apps, newsletters, no-code builders, and AI agents. Includes host-city data, safe official ticketing links, flight and hotel search routes, heuristic package references, and transparent scoring for real offers supplied by the buyer. This version does not return live fare, hotel, or ticket inventory.\n"
+  },
+  "servers": [
+    {
+      "url": "https://worldcuptraveldealsapi.p.rapidapi.com",
+      "description": "Paid RapidAPI gateway."
+    }
+  ],
+  "security": [
+    {
+      "rapidApiKey": [
+
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "name": "Travel Deals"
+    },
+    {
+      "name": "Host Cities"
+    },
+    {
+      "name": "Safety"
+    },
+    {
+      "name": "Metadata"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "tags": [
+          "Metadata"
+        ],
+        "summary": "API overview",
+        "responses": {
+          "200": {
+            "description": "API overview"
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "tags": [
+          "Metadata"
+        ],
+        "summary": "Health status",
+        "security": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "Runtime health and provider readiness",
+            "content": {
+              "application/json": {
+                "example": {
+                  "status": "ok",
+                  "api": "WorldCupTravelDealsAPI",
+                  "version": "1.2.0",
+                  "host_city_count": 16,
+                  "inventory_disclosure": {
+                    "mode": "planning_links_and_heuristic_baselines",
+                    "contains_live_fares": false,
+                    "contains_live_hotel_availability": false
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cities": {
+      "get": {
+        "tags": [
+          "Host Cities"
+        ],
+        "summary": "List World Cup 2026 host cities",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "region",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "USA",
+                "Mexico",
+                "Canada"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Host cities",
+            "content": {
+              "application/json": {
+                "example": {
+                  "count": 1,
+                  "cities": [
+                    {
+                      "slug": "miami",
+                      "city": "Miami",
+                      "country": "United States",
+                      "region": "USA",
+                      "stadium": "Hard Rock Stadium",
+                      "airports": [
+                        "MIA",
+                        "FLL"
+                      ],
+                      "expected_demand": "very_high",
+                      "match_window": {
+                        "start": "2026-06-15",
+                        "end": "2026-07-18"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cities/{slug}": {
+      "get": {
+        "tags": [
+          "Host Cities"
+        ],
+        "summary": "Get host city detail, baseline, and travel links",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "slug",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "origin",
+            "schema": {
+              "type": "string",
+              "example": "EZE"
+            }
+          },
+          {
+            "in": "query",
+            "name": "start",
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "example": "2026-06-15"
+            }
+          },
+          {
+            "in": "query",
+            "name": "end",
+            "schema": {
+              "type": "string",
+              "format": "date",
+              "example": "2026-06-21"
+            }
+          },
+          {
+            "in": "query",
+            "name": "nights",
+            "schema": {
+              "type": "integer",
+              "default": 4
+            }
+          },
+          {
+            "in": "query",
+            "name": "travelers",
+            "schema": {
+              "type": "integer",
+              "default": 2
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Host city detail"
+          },
+          "404": {
+            "description": "Unknown city"
+          }
+        }
+      }
+    },
+    "/deals/search": {
+      "get": {
+        "tags": [
+          "Travel Deals"
+        ],
+        "summary": "Generate planning candidates, reference estimates, and provider search links",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "origin",
+            "schema": {
+              "type": "string",
+              "default": "EZE"
+            }
+          },
+          {
+            "in": "query",
+            "name": "city",
+            "schema": {
+              "type": "string",
+              "default": "miami"
+            }
+          },
+          {
+            "in": "query",
+            "name": "start",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "in": "query",
+            "name": "end",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "in": "query",
+            "name": "nights",
+            "schema": {
+              "type": "integer",
+              "default": 5
+            }
+          },
+          {
+            "in": "query",
+            "name": "travelers",
+            "schema": {
+              "type": "integer",
+              "default": 2
+            }
+          },
+          {
+            "in": "query",
+            "name": "budget",
+            "description": "Optional known package budget in USD to score against baseline.",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Package candidates",
+            "content": {
+              "application/json": {
+                "example": {
+                  "query": {
+                    "origin": "EZE",
+                    "city": "miami",
+                    "start": "2026-06-15",
+                    "end": "2026-06-20",
+                    "travelers": 2,
+                    "nights": 5,
+                    "budget": null
+                  },
+                  "inventory_disclosure": {
+                    "mode": "planning_links_and_heuristic_baselines",
+                    "contains_live_fares": false,
+                    "contains_live_hotel_availability": false
+                  },
+                  "baseline": {
+                    "currency": "USD",
+                    "flight_per_person": 1044,
+                    "hotel_per_room_night": 464,
+                    "local_daily_per_person": 181,
+                    "estimated_total": 6218,
+                    "method": "Heuristic event-travel baseline. Use /score to compare real offers from your providers."
+                  },
+                  "results": [
+                    {
+                      "type": "package_search",
+                      "label": "event_window",
+                      "city": "miami",
+                      "origin": "EZE",
+                      "start": "2026-06-15",
+                      "end": "2026-06-20",
+                      "travelers": 2,
+                      "estimated_reference_price": 6218,
+                      "pricing_type": "heuristic_reference",
+                      "is_live_offer": false,
+                      "deal_score": {
+                        "score": 64,
+                        "label": "fair"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/score": {
+      "get": {
+        "tags": [
+          "Travel Deals"
+        ],
+        "summary": "Score a real offer against a baseline",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "price",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "in": "query",
+            "name": "baseline",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "in": "query",
+            "name": "safety",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "official",
+                "official_or_direct",
+                "provider_verified",
+                "unknown"
+              ],
+              "default": "official_or_direct"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deal score",
+            "content": {
+              "application/json": {
+                "example": {
+                  "deal_score": {
+                    "score": 94.5,
+                    "label": "excellent",
+                    "savings_percent": 25,
+                    "baseline": 1200,
+                    "price": 900,
+                    "safety": "official"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/official-links": {
+      "get": {
+        "tags": [
+          "Safety"
+        ],
+        "summary": "Official ticketing and hospitality links",
+        "responses": {
+          "200": {
+            "description": "Official FIFA ticketing safety links",
+            "content": {
+              "application/json": {
+                "example": {
+                  "ticketing": {
+                    "official_tickets": "https://www.fifa.com/tickets",
+                    "official_hospitality": "https://fifaworldcup26.hospitalityexperiences.fifa.com/"
+                  },
+                  "warning": "Avoid unofficial ticket sellers unless the buyer understands transfer, resale, and fraud risk."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pricing-recommendation": {
+      "get": {
+        "tags": [
+          "Metadata"
+        ],
+        "summary": "Suggested RapidAPI pricing plans",
+        "responses": {
+          "200": {
+            "description": "Pricing recommendation"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "rapidApiKey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-RapidAPI-Key"
+      }
+    }
+  }
+}

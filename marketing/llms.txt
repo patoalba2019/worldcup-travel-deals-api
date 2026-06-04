@@ -2,6 +2,9 @@
 
 Paid API products sold through RapidAPI.
 
+Machine-readable catalog: https://patoapis-paid-apis.onrender.com/apis.json
+RFC 9727 API catalog: https://patoapis-paid-apis.onrender.com/.well-known/api-catalog
+
 ## RemoteJobsAPI
 
 Normalized remote job listings from Jobicy and Himalayas with search, filters,

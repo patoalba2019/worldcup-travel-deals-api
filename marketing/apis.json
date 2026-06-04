@@ -1,0 +1,91 @@
+{
+  "name": "patoapis API Catalog",
+  "description": "Paid API products for remote-job data and World Cup 2026 travel planning, sold and authenticated through RapidAPI.",
+  "url": "https://patoapis-paid-apis.onrender.com/apis.json",
+  "created": "2026-06-04",
+  "modified": "2026-06-04",
+  "specificationVersion": "0.20",
+  "tags": [
+    "paid APIs",
+    "RapidAPI",
+    "remote jobs",
+    "World Cup 2026",
+    "travel"
+  ],
+  "apis": [
+    {
+      "aid": "patoapis-paid-apis.onrender.com:remotejobsapi",
+      "name": "RemoteJobsAPI",
+      "description": "Normalized remote-job listings with search, filters, pagination, job details, statistics, freshness metadata, source attribution, and resilient caching.",
+      "image": "https://patoapis-paid-apis.onrender.com/assets/remotejobs-api-logo.png",
+      "humanURL": "https://patoapis-paid-apis.onrender.com/remote-jobs-api.html",
+      "baseURL": "https://remotejobsapi.p.rapidapi.com",
+      "tags": [
+        "remote jobs",
+        "recruiting",
+        "job boards",
+        "AI agents",
+        "automation"
+      ],
+      "properties": [
+        {
+          "type": "Documentation",
+          "url": "https://patoapis-paid-apis.onrender.com/remote-jobs-api.html"
+        },
+        {
+          "type": "OpenAPI",
+          "url": "https://patoapis-paid-apis.onrender.com/specs/remotejobs-openapi.json"
+        },
+        {
+          "type": "Pricing",
+          "url": "https://rapidapi.com/patoalba2019/api/remotejobsapi"
+        },
+        {
+          "type": "Signup",
+          "url": "https://rapidapi.com/patoalba2019/api/remotejobsapi"
+        },
+        {
+          "type": "Status",
+          "url": "https://patoapis-remotejobs-api.onrender.com/health"
+        }
+      ]
+    },
+    {
+      "aid": "patoapis-paid-apis.onrender.com:worldcuptraveldealsapi",
+      "name": "WorldCupTravelDealsAPI",
+      "description": "World Cup 2026 host-city planning, official ticket routes, provider search links, reference estimates, and transparent scoring for buyer-supplied offers.",
+      "image": "https://patoapis-paid-apis.onrender.com/assets/worldcup-travel-deals-logo.png",
+      "humanURL": "https://patoapis-paid-apis.onrender.com/world-cup-travel-api.html",
+      "baseURL": "https://worldcuptraveldealsapi.p.rapidapi.com",
+      "tags": [
+        "World Cup 2026",
+        "travel",
+        "tourism",
+        "travel agencies",
+        "AI agents"
+      ],
+      "properties": [
+        {
+          "type": "Documentation",
+          "url": "https://patoapis-paid-apis.onrender.com/world-cup-travel-api.html"
+        },
+        {
+          "type": "OpenAPI",
+          "url": "https://patoapis-paid-apis.onrender.com/specs/worldcup-openapi.json"
+        },
+        {
+          "type": "Pricing",
+          "url": "https://rapidapi.com/patoalba2019/api/worldcuptraveldealsapi"
+        },
+        {
+          "type": "Signup",
+          "url": "https://rapidapi.com/patoalba2019/api/worldcuptraveldealsapi"
+        },
+        {
+          "type": "Status",
+          "url": "https://worldcup-travel-deals-api.onrender.com/health"
+        }
+      ]
+    }
+  ]
+}

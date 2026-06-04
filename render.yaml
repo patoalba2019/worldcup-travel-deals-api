@@ -28,3 +28,9 @@ services:
       - path: /*
         name: Referrer-Policy
         value: strict-origin-when-cross-origin
+      - path: /.well-known/api-catalog
+        name: Content-Type
+        value: application/linkset+json
+      - path: /apis.json
+        name: Content-Type
+        value: application/json
