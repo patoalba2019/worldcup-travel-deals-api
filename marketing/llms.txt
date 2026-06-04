@@ -1,0 +1,28 @@
+# patoapis
+
+Paid API products sold through RapidAPI.
+
+## RemoteJobsAPI
+
+Normalized remote job listings from Jobicy and Himalayas with search, filters,
+pagination, job details, statistics, freshness metadata, source attribution,
+and resilient caching.
+
+Product page: https://patoapis-paid-apis.onrender.com/remote-jobs-api.html
+Purchase: https://rapidapi.com/patoalba2019/api/remotejobsapi
+
+## WorldCupTravelDealsAPI
+
+World Cup 2026 travel planning and deal-scoring data for all 16 host cities,
+including official FIFA links, provider search routes, heuristic reference
+estimates, and transparent scoring for buyer-supplied offers. It does not return
+live fare, hotel, or ticket inventory.
+
+Product page: https://patoapis-paid-apis.onrender.com/world-cup-travel-api.html
+Purchase: https://rapidapi.com/patoalba2019/api/worldcuptraveldealsapi
+
+## Commercial access
+
+All product endpoints require an authorized paid marketplace gateway. Direct
+backend access is blocked. Lightweight health endpoints are public only for
+operational monitoring.

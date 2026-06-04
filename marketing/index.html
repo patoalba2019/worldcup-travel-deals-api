@@ -3,16 +3,16 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>patoapis | Paid APIs for Travel and Remote Work Data</title>
+    <title>Remote Jobs API & World Cup 2026 Travel API | patoapis</title>
     <meta
       name="description"
-      content="Production-ready paid APIs for World Cup 2026 travel planning and normalized remote job data. Subscribe securely through RapidAPI."
+      content="Paid Remote Jobs API and World Cup 2026 Travel API for developers, agencies, AI agents, dashboards, and automation. Plans start at $4.99 on RapidAPI."
     >
     <meta property="og:type" content="website">
-    <meta property="og:title" content="patoapis | Paid APIs for Travel and Remote Work Data">
+    <meta property="og:title" content="Remote Jobs API & World Cup 2026 Travel API | patoapis">
     <meta
       property="og:description"
-      content="Focused paid APIs for World Cup 2026 travel planning and normalized remote job data."
+      content="Production-ready paid APIs for normalized remote jobs and World Cup 2026 travel planning. Plans start at $4.99."
     >
     <meta property="og:url" content="https://patoapis-paid-apis.onrender.com/">
     <meta property="og:image" content="https://patoapis-paid-apis.onrender.com/assets/patoapis-hero.jpg">
@@ -26,12 +26,63 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "patoapis",
-        "url": "https://patoapis-paid-apis.onrender.com/",
-        "sameAs": [
-          "https://rapidapi.com/patoalba2019/api/worldcuptraveldealsapi",
-          "https://rapidapi.com/patoalba2019/api/remotejobsapi"
+        "@graph": [
+          {
+            "@type": "Organization",
+            "name": "patoapis",
+            "url": "https://patoapis-paid-apis.onrender.com/",
+            "sameAs": [
+              "https://rapidapi.com/patoalba2019/api/worldcuptraveldealsapi",
+              "https://rapidapi.com/patoalba2019/api/remotejobsapi"
+            ]
+          },
+          {
+            "@type": "Product",
+            "name": "RemoteJobsAPI",
+            "description": "Normalized remote job listings with search, filters, pagination, stats, and source attribution.",
+            "url": "https://patoapis-paid-apis.onrender.com/remote-jobs-api.html",
+            "offers": {
+              "@type": "Offer",
+              "price": "4.99",
+              "priceCurrency": "USD",
+              "url": "https://rapidapi.com/patoalba2019/api/remotejobsapi",
+              "availability": "https://schema.org/InStock"
+            }
+          },
+          {
+            "@type": "Product",
+            "name": "WorldCupTravelDealsAPI",
+            "description": "World Cup 2026 host-city planning, official links, provider search routes, reference estimates, and deal scoring.",
+            "url": "https://patoapis-paid-apis.onrender.com/world-cup-travel-api.html",
+            "offers": {
+              "@type": "Offer",
+              "price": "4.99",
+              "priceCurrency": "USD",
+              "url": "https://rapidapi.com/patoalba2019/api/worldcuptraveldealsapi",
+              "availability": "https://schema.org/InStock"
+            }
+          },
+          {
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Where do I purchase and authenticate?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Subscribe through the relevant RapidAPI listing. RapidAPI handles plan selection and customer authentication."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I call the Render backend directly?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. Product endpoints require a private marketplace gateway secret. Only lightweight health monitoring is publicly reachable."
+                }
+              }
+            ]
+          }
         ]
       }
     </script>
@@ -44,6 +95,7 @@
       </a>
       <nav aria-label="Primary navigation">
         <a href="#apis">APIs</a>
+        <a href="#pricing">Pricing</a>
         <a href="#proof">Reliability</a>
         <a href="#faq">FAQ</a>
       </nav>
@@ -75,7 +127,7 @@
             </a>
             <a
               class="button secondary"
-              href="https://rapidapi.com/patoalba2019"
+              href="https://rapidapi.com/patoalba2019?utm_source=patoapis_site&utm_medium=referral&utm_campaign=provider_profile"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -87,6 +139,31 @@
             <span><i data-lucide="shield-check"></i> Paid gateway protected</span>
             <span><i data-lucide="activity"></i> Monitored health endpoints</span>
             <span><i data-lucide="file-code-2"></i> OpenAPI documented</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="status-band" aria-label="Live API status">
+        <div class="status-inner">
+          <div>
+            <p class="eyebrow dark">Live readiness</p>
+            <h2>Servers wake while you review the products</h2>
+          </div>
+          <div class="status-list">
+            <div class="status-item" data-status="remotejobs">
+              <span class="status-dot" aria-hidden="true"></span>
+              <div>
+                <strong>RemoteJobsAPI</strong>
+                <span class="status-message">Checking live status...</span>
+              </div>
+            </div>
+            <div class="status-item" data-status="worldcup">
+              <span class="status-dot" aria-hidden="true"></span>
+              <div>
+                <strong>WorldCupTravelDealsAPI</strong>
+                <span class="status-message">Checking live status...</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -129,9 +206,10 @@
               <span>AI assistants</span>
               <span>Newsletters</span>
             </div>
+            <p class="price-line"><strong>Plans from $4.99/month</strong> · 1,000 requests</p>
             <a
               class="button product-button"
-              href="https://rapidapi.com/patoalba2019/api/worldcuptraveldealsapi"
+              href="https://rapidapi.com/patoalba2019/api/worldcuptraveldealsapi?utm_source=patoapis_site&utm_medium=referral&utm_campaign=worldcup_product"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -141,6 +219,10 @@
             <a class="guide-link" href="guides/world-cup-city-comparison.html">
               Read the city-comparison guide
               <i data-lucide="book-open" aria-hidden="true"></i>
+            </a>
+            <a class="guide-link" href="world-cup-travel-api.html">
+              View product details and pricing
+              <i data-lucide="arrow-right" aria-hidden="true"></i>
             </a>
           </article>
 
@@ -168,9 +250,10 @@
               <span>Recruiting tools</span>
               <span>AI agents</span>
             </div>
+            <p class="price-line"><strong>Plans from $4.99/month</strong> · 1,000 requests</p>
             <a
               class="button product-button jobs-button"
-              href="https://rapidapi.com/patoalba2019/api/remotejobsapi"
+              href="https://rapidapi.com/patoalba2019/api/remotejobsapi?utm_source=patoapis_site&utm_medium=referral&utm_campaign=remotejobs_product"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -181,6 +264,43 @@
               Read the remote-jobs guide
               <i data-lucide="book-open" aria-hidden="true"></i>
             </a>
+            <a class="guide-link" href="remote-jobs-api.html">
+              View product details and pricing
+              <i data-lucide="arrow-right" aria-hidden="true"></i>
+            </a>
+          </article>
+        </div>
+      </section>
+
+      <section class="section pricing-section" id="pricing" aria-labelledby="pricing-title">
+        <div class="section-heading">
+          <p class="eyebrow dark">Simple paid plans</p>
+          <h2 id="pricing-title">Start at $4.99. Upgrade only when usage grows.</h2>
+          <p>
+            The same predictable plan structure is available for both APIs.
+            There is no public free-data endpoint.
+          </p>
+        </div>
+        <div class="pricing-grid">
+          <article class="plan">
+            <span>Starter</span>
+            <strong>$4.99</strong>
+            <p>1,000 requests/month</p>
+          </article>
+          <article class="plan recommended">
+            <span>Pro</span>
+            <strong>$9.99</strong>
+            <p>10,000 requests/month</p>
+          </article>
+          <article class="plan">
+            <span>Ultra</span>
+            <strong>$29</strong>
+            <p>50,000 requests/month</p>
+          </article>
+          <article class="plan">
+            <span>Mega</span>
+            <strong>$79</strong>
+            <p>200,000 requests/month</p>
           </article>
         </div>
       </section>
@@ -285,7 +405,7 @@
         <div class="final-actions">
           <a
             class="button primary"
-            href="https://rapidapi.com/patoalba2019/api/worldcuptraveldealsapi"
+            href="https://rapidapi.com/patoalba2019/api/worldcuptraveldealsapi?utm_source=patoapis_site&utm_medium=referral&utm_campaign=final_cta"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -294,7 +414,7 @@
           </a>
           <a
             class="button secondary light"
-            href="https://rapidapi.com/patoalba2019/api/remotejobsapi"
+            href="https://rapidapi.com/patoalba2019/api/remotejobsapi?utm_source=patoapis_site&utm_medium=referral&utm_campaign=final_cta"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -311,7 +431,7 @@
         <span>patoapis</span>
       </a>
       <p>Paid API products by Patricio Albano.</p>
-      <a href="https://rapidapi.com/patoalba2019" target="_blank" rel="noopener noreferrer">
+      <a href="https://rapidapi.com/patoalba2019?utm_source=patoapis_site&utm_medium=referral&utm_campaign=footer" target="_blank" rel="noopener noreferrer">
         RapidAPI provider profile
       </a>
     </footer>

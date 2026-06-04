@@ -259,9 +259,77 @@ h3 {
 .product-grid,
 .proof-inner,
 .endpoint-list,
-.faq-list {
+.faq-list,
+.status-inner,
+.pricing-grid {
   width: min(1160px, 100%);
   margin-inline: auto;
+}
+
+.status-band {
+  padding: 28px 5vw;
+  background: #ffffff;
+  border-bottom: 1px solid var(--line);
+}
+
+.status-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 40px;
+  align-items: center;
+}
+
+.status-inner h2 {
+  margin-bottom: 0;
+  font-size: 25px;
+}
+
+.status-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.status-item {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+.status-item > div {
+  min-width: 0;
+  display: grid;
+}
+
+.status-item strong,
+.status-message {
+  overflow-wrap: anywhere;
+}
+
+.status-message {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.status-dot {
+  flex: 0 0 11px;
+  width: 11px;
+  height: 11px;
+  background: #d29b24;
+  border-radius: 50%;
+}
+
+.status-item.ready .status-dot {
+  background: var(--green);
+}
+
+.status-item.unavailable .status-dot {
+  background: var(--red);
 }
 
 .section-heading {
@@ -378,6 +446,16 @@ h3 {
   font-weight: 800;
 }
 
+.price-line {
+  margin: -8px 0 16px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.price-line strong {
+  color: var(--ink);
+}
+
 .product-button {
   color: #ffffff;
   background: var(--blue);
@@ -406,6 +484,50 @@ h3 {
 .guide-link svg {
   width: 16px;
   height: 16px;
+}
+
+.pricing-section {
+  background: #ffffff;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.plan {
+  min-width: 0;
+  padding: 22px;
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.plan.recommended {
+  background: #eef5ff;
+  border-color: #8fb5fb;
+}
+
+.plan span {
+  display: block;
+  color: var(--blue-dark);
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.plan strong {
+  display: block;
+  margin: 6px 0 2px;
+  font-size: 32px;
+  line-height: 1.1;
+}
+
+.plan p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
 }
 
 .proof-band {
@@ -630,6 +752,89 @@ footer p {
   border-top: 1px solid var(--line);
 }
 
+.product-page-main {
+  padding-top: var(--header-height);
+}
+
+.product-page-hero {
+  padding: 74px 5vw 58px;
+  color: #ffffff;
+  background: var(--charcoal);
+}
+
+.product-page-hero-inner,
+.product-page-content {
+  width: min(1080px, 100%);
+  margin-inline: auto;
+}
+
+.product-page-hero-inner {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 28px;
+  align-items: center;
+}
+
+.product-page-logo {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 8px;
+}
+
+.product-page-hero h1 {
+  margin-bottom: 12px;
+  font-size: clamp(40px, 7vw, 74px);
+  line-height: 1;
+  overflow-wrap: anywhere;
+}
+
+.product-page-hero p:last-child {
+  max-width: 760px;
+  margin-bottom: 0;
+  color: #d7e0eb;
+  font-size: 18px;
+}
+
+.product-page-content {
+  padding: 64px 5vw 86px;
+}
+
+.product-page-content h2 {
+  margin-top: 54px;
+  font-size: 30px;
+}
+
+.product-page-content p,
+.product-page-content li {
+  color: var(--muted);
+  font-size: 17px;
+}
+
+.buyer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  padding: 0;
+  list-style: none;
+}
+
+.buyer-grid li {
+  padding: 18px;
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+.product-page-content pre {
+  overflow-x: auto;
+  padding: 20px;
+  color: #e9f0f8;
+  background: #111a28;
+  border-radius: 6px;
+}
+
 @media (max-width: 800px) {
   .site-header {
     gap: 12px;
@@ -666,8 +871,16 @@ footer p {
   }
 
   .product-grid,
-  .proof-inner {
+  .proof-inner,
+  .status-inner,
+  .product-page-hero-inner {
     grid-template-columns: 1fr;
+  }
+
+  .status-list,
+  .pricing-grid,
+  .buyer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .section {
@@ -738,5 +951,16 @@ footer p {
 
   .metrics {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .status-list,
+  .pricing-grid,
+  .buyer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .product-page-logo {
+    width: 88px;
+    height: 88px;
   }
 }
