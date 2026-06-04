@@ -13,6 +13,7 @@ class WorldCupTravelDealsApiTest(unittest.TestCase):
         os.environ.pop("REQUIRE_PAID_GATEWAY", None)
         os.environ.pop("PAID_GATEWAY_SECRET", None)
         os.environ.pop("PAID_GATEWAY_SECRETS", None)
+        os.environ.pop("PAID_GATEWAY_SECRET_HASHES", None)
 
     def test_health(self):
         response = self.client.get("/health")
@@ -60,17 +61,25 @@ class WorldCupTravelDealsApiTest(unittest.TestCase):
     def test_paid_gateway_fails_closed_by_default(self):
         os.environ.pop("REQUIRE_PAID_GATEWAY", None)
         os.environ.pop("PAID_GATEWAY_SECRET", None)
+        os.environ.pop("PAID_GATEWAY_SECRET_HASHES", None)
         self.assertEqual(self.client.get("/health").status_code, 200)
         self.assertEqual(self.client.get("/cities").status_code, 503)
 
     def test_paid_gateway_blocks_product_data_but_keeps_health_public(self):
         os.environ["REQUIRE_PAID_GATEWAY"] = "true"
         os.environ["PAID_GATEWAY_SECRETS"] = "rapidapi-secret,other-market-secret"
+        os.environ["PAID_GATEWAY_SECRET_HASHES"] = (
+            "4e598f5daafc2fda61641ddbb5956deb23fde6616366dc9dd5a7c9f47da4d787"
+        )
 
         self.assertEqual(self.client.get("/health").status_code, 200)
         self.assertEqual(self.client.get("/cities").status_code, 402)
         self.assertEqual(
             self.client.get("/cities", headers={"X-API-Gateway-Secret": "other-market-secret"}).status_code,
+            200,
+        )
+        self.assertEqual(
+            self.client.get("/cities", headers={"X-API-Gateway-Secret": "hashed-secret"}).status_code,
             200,
         )
 

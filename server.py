@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import hmac
 import math
 import os
@@ -302,7 +303,9 @@ def enforce_paid_gateway():
         return None
     configured = os.getenv("PAID_GATEWAY_SECRETS") or os.getenv("PAID_GATEWAY_SECRET")
     expected = [secret.strip() for secret in (configured or "").split(",") if secret.strip()]
-    if not expected:
+    configured_hashes = os.getenv("PAID_GATEWAY_SECRET_HASHES", "")
+    expected_hashes = [value.strip().lower() for value in configured_hashes.split(",") if value.strip()]
+    if not expected and not expected_hashes:
         return jsonify({"error": "Paid gateway is required but not configured."}), 503
     provided = (
         request.headers.get("X-RapidAPI-Proxy-Secret")
@@ -310,7 +313,10 @@ def enforce_paid_gateway():
         or request.headers.get("X-WorldCupTravelDeals-Secret")
         or ""
     )
-    if not any(hmac.compare_digest(provided, secret) for secret in expected):
+    provided_hash = hashlib.sha256(provided.encode("utf-8")).hexdigest()
+    plaintext_match = any(hmac.compare_digest(provided, secret) for secret in expected)
+    hash_match = any(hmac.compare_digest(provided_hash, value) for value in expected_hashes)
+    if not plaintext_match and not hash_match:
         return (
             jsonify(
                 {

@@ -55,6 +55,11 @@ PAID_GATEWAY_SECRET=<strong-shared-secret>
 
 Then configure RapidAPI to send the same value as `X-RapidAPI-Proxy-Secret` or `X-API-Gateway-Secret`. Direct backend calls without that secret receive `402 Payment Required`.
 
+For deployments managed from version control, set
+`PAID_GATEWAY_SECRET_HASHES=<sha256-of-shared-secret>` instead. RapidAPI keeps
+the original private secret, while GitHub and Render store only its
+non-reversible fingerprint.
+
 ## RapidAPI Pricing Suggestion
 
 - **Starter**: USD 4.99/month, 1,000 requests/month.

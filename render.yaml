@@ -11,6 +11,8 @@ services:
         value: "true"
       - key: PAID_GATEWAY_SECRET
         generateValue: true
+      - key: PAID_GATEWAY_SECRET_HASHES
+        value: 3edb013b40a9e3734ff286b419f13a076ee4c9d39afbfae2912c56d67d5f2f61
   - type: web
     name: patoapis-paid-apis
     runtime: static
