@@ -308,25 +308,12 @@ h3 {
   border-bottom: 1px solid var(--line);
 }
 
-.product-card-top img,
-.jobs-symbol {
+.product-card-top img {
   flex: 0 0 64px;
   width: 64px;
   height: 64px;
   object-fit: cover;
   border-radius: 8px;
-}
-
-.jobs-symbol {
-  display: grid;
-  place-items: center;
-  color: #ffffff;
-  background: var(--green);
-}
-
-.jobs-symbol svg {
-  width: 31px;
-  height: 31px;
 }
 
 .product-type {
@@ -738,8 +725,7 @@ footer p {
     align-items: flex-start;
   }
 
-  .product-card-top img,
-  .jobs-symbol {
+  .product-card-top img {
     flex-basis: 52px;
     width: 52px;
     height: 52px;
