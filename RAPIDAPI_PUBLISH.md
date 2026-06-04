@@ -37,20 +37,21 @@ world-cup-2026, travel-api, flight-deals, hotel-deals, tourism, fifa, sports-tra
 
 ## Suggested Plans
 
-- Basic evaluation: USD 0, 25 requests/month hard limit.
+- Starter: USD 4.99/month, 1,000 requests/month.
 - Pro: USD 9.99/month, 10,000 requests/month.
 - Ultra: USD 29/month, 50,000 requests/month.
 - Mega: USD 79/month, 200,000 requests/month.
 
-The Basic plan is only for integration verification. Direct backend usage
-remains blocked outside the authorized marketplace.
+Every plan is paid. Direct backend usage remains blocked outside the authorized
+marketplace.
 
 ## Production Security
 
 Set the backend environment variables:
 
 - `REQUIRE_PAID_GATEWAY=true`
-- `PAID_GATEWAY_SECRET=<strong-shared-secret>`
+- `PAID_GATEWAY_SECRET=<rapidapi-secret>` for one marketplace, or
+  `PAID_GATEWAY_SECRETS=<rapidapi-secret>,<other-market-secret>` for several.
 
 Configure RapidAPI to send that secret as `X-RapidAPI-Proxy-Secret` or `X-API-Gateway-Secret`. This prevents direct backend use outside the paid marketplace.
 

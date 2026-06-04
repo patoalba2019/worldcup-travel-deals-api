@@ -6,11 +6,13 @@ from server import app
 
 class WorldCupTravelDealsApiTest(unittest.TestCase):
     def setUp(self):
+        os.environ["REQUIRE_PAID_GATEWAY"] = "false"
         self.client = app.test_client()
 
     def tearDown(self):
         os.environ.pop("REQUIRE_PAID_GATEWAY", None)
         os.environ.pop("PAID_GATEWAY_SECRET", None)
+        os.environ.pop("PAID_GATEWAY_SECRETS", None)
 
     def test_health(self):
         response = self.client.get("/health")
@@ -25,6 +27,12 @@ class WorldCupTravelDealsApiTest(unittest.TestCase):
         data = response.get_json()
         self.assertEqual(data["city"]["slug"], "miami")
         self.assertIn("google_flights", data["search_links"])
+        expected_total = (
+            data["baseline"]["flight_per_person"] * 2
+            + data["baseline"]["hotel_per_room_night"] * 5
+            + data["baseline"]["local_daily_per_person"] * 5 * 2
+        )
+        self.assertEqual(data["baseline"]["estimated_total"], expected_total)
 
     def test_deal_search(self):
         response = self.client.get("/deals/search?origin=EZE&city=los-angeles&travelers=2&nights=6")
@@ -41,14 +49,28 @@ class WorldCupTravelDealsApiTest(unittest.TestCase):
         data = response.get_json()
         self.assertGreater(data["deal_score"]["score"], 70)
 
+    def test_invalid_dates_and_numbers_return_400(self):
+        self.assertEqual(
+            self.client.get("/deals/search?start=2026-06-20&end=2026-06-19").status_code,
+            400,
+        )
+        self.assertEqual(self.client.get("/score?price=nan&baseline=1200").status_code, 400)
+        self.assertEqual(self.client.get("/score?price=900&baseline=1200&safety=unsafe").status_code, 400)
+
+    def test_paid_gateway_fails_closed_by_default(self):
+        os.environ.pop("REQUIRE_PAID_GATEWAY", None)
+        os.environ.pop("PAID_GATEWAY_SECRET", None)
+        self.assertEqual(self.client.get("/health").status_code, 200)
+        self.assertEqual(self.client.get("/cities").status_code, 503)
+
     def test_paid_gateway_blocks_product_data_but_keeps_health_public(self):
         os.environ["REQUIRE_PAID_GATEWAY"] = "true"
-        os.environ["PAID_GATEWAY_SECRET"] = "market-secret"
+        os.environ["PAID_GATEWAY_SECRETS"] = "rapidapi-secret,other-market-secret"
 
         self.assertEqual(self.client.get("/health").status_code, 200)
         self.assertEqual(self.client.get("/cities").status_code, 402)
         self.assertEqual(
-            self.client.get("/cities", headers={"X-API-Gateway-Secret": "market-secret"}).status_code,
+            self.client.get("/cities", headers={"X-API-Gateway-Secret": "other-market-secret"}).status_code,
             200,
         )
 

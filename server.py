@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hmac
 import math
 import os
 from datetime import UTC, date, datetime, timedelta
@@ -9,7 +10,7 @@ from flask import Flask, jsonify, request
 
 
 API_NAME = "WorldCupTravelDealsAPI"
-API_VERSION = "1.1.0"
+API_VERSION = "1.2.0"
 OFFICIAL_TICKET_URL = "https://www.fifa.com/tickets"
 OFFICIAL_HOSPITALITY_URL = "https://fifaworldcup26.hospitalityexperiences.fifa.com/"
 OFFICIAL_RESALE_HELP_URL = (
@@ -288,6 +289,8 @@ def add_cors_headers(response):
     response.headers["Access-Control-Allow-Origin"] = "*"
     response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
     response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+    response.headers["Cache-Control"] = "private, no-store"
+    response.headers["X-Content-Type-Options"] = "nosniff"
     return response
 
 
@@ -295,17 +298,19 @@ def add_cors_headers(response):
 def enforce_paid_gateway():
     if request.method == "OPTIONS" or request.path == "/health":
         return None
-    if os.getenv("REQUIRE_PAID_GATEWAY", "false").lower() not in {"1", "true", "yes"}:
+    if os.getenv("REQUIRE_PAID_GATEWAY", "true").lower() not in {"1", "true", "yes"}:
         return None
-    expected = os.getenv("PAID_GATEWAY_SECRET")
+    configured = os.getenv("PAID_GATEWAY_SECRETS") or os.getenv("PAID_GATEWAY_SECRET")
+    expected = [secret.strip() for secret in (configured or "").split(",") if secret.strip()]
     if not expected:
         return jsonify({"error": "Paid gateway is required but not configured."}), 503
     provided = (
         request.headers.get("X-RapidAPI-Proxy-Secret")
         or request.headers.get("X-API-Gateway-Secret")
         or request.headers.get("X-WorldCupTravelDeals-Secret")
+        or ""
     )
-    if provided != expected:
+    if not any(hmac.compare_digest(provided, secret) for secret in expected):
         return (
             jsonify(
                 {
@@ -338,6 +343,33 @@ def parse_int(name: str, default: int, minimum: int = 1, maximum: int = 99) -> i
     return max(minimum, min(maximum, value))
 
 
+def parse_positive_float(name: str) -> float:
+    raw = request.args.get(name)
+    if raw in (None, ""):
+        raise ValueError(f"{name} is required.")
+    try:
+        value = float(raw)
+    except ValueError as exc:
+        raise ValueError(f"{name} must be a number greater than zero.") from exc
+    if not math.isfinite(value) or value <= 0:
+        raise ValueError(f"{name} must be a finite number greater than zero.")
+    return value
+
+
+def parse_stay_window(default_start: date, default_nights: int) -> tuple[date, date, int]:
+    nights = parse_int("nights", default_nights, 1, 30)
+    start = parse_date(request.args.get("start"), default_start)
+    raw_end = request.args.get("end")
+    if not raw_end:
+        return start, start + timedelta(days=nights), nights
+
+    end = parse_date(raw_end, start + timedelta(days=nights))
+    actual_nights = (end - start).days
+    if actual_nights < 1 or actual_nights > 30:
+        raise ValueError("end must be between 1 and 30 days after start.")
+    return start, end, actual_nights
+
+
 def money(value: float) -> int:
     return int(round(value))
 
@@ -354,16 +386,20 @@ def city_baseline(city: dict, nights: int, travelers: int, origin: str | None = 
     if origin and origin.upper() in city["airports"]:
         flight_base = 0
 
+    flight_per_person = money(flight_base * demand_multiplier)
+    hotel_per_room_night = money(hotel_night * demand_multiplier)
+    local_daily_per_person = money(local_daily * demand_multiplier)
+    estimated_total = (
+        flight_per_person * travelers
+        + hotel_per_room_night * nights * max(1, math.ceil(travelers / 2))
+        + local_daily_per_person * nights * travelers
+    )
     return {
         "currency": "USD",
-        "flight_per_person": money(flight_base * demand_multiplier),
-        "hotel_per_room_night": money(hotel_night * demand_multiplier),
-        "local_daily_per_person": money(local_daily * demand_multiplier),
-        "estimated_total": money(
-            (flight_base * travelers)
-            + (hotel_night * nights * max(1, math.ceil(travelers / 2)))
-            + (local_daily * nights * travelers)
-        ),
+        "flight_per_person": flight_per_person,
+        "hotel_per_room_night": hotel_per_room_night,
+        "local_daily_per_person": local_daily_per_person,
+        "estimated_total": estimated_total,
         "method": "Heuristic event-travel baseline. Use /score to compare real offers from your providers.",
     }
 
@@ -372,7 +408,7 @@ def safety_notes() -> list[str]:
     return [
         "World Cup ticket purchases should be routed through FIFA official ticketing, FIFA official resale/exchange, or official hospitality providers.",
         "This API does not validate unofficial ticket inventory and does not endorse grey-market resale listings.",
-        "Flight and hotel deep links are search links unless a live provider key is configured.",
+        "Flight and hotel deep links are search links. Live inventory is not currently integrated.",
     ]
 
 
@@ -402,8 +438,11 @@ def build_search_links(city: dict, origin: str, start: date, end: date, traveler
 
 
 def deal_score(price: float, baseline: float, safety: str = "official_or_direct") -> dict:
-    if price <= 0 or baseline <= 0:
-        raise ValueError("price and baseline must be greater than zero.")
+    if not math.isfinite(price) or not math.isfinite(baseline) or price <= 0 or baseline <= 0:
+        raise ValueError("price and baseline must be finite numbers greater than zero.")
+    supported_safety = {"official", "official_or_direct", "provider_verified", "unknown"}
+    if safety not in supported_safety:
+        raise ValueError(f"Unknown safety value '{safety}'. Use one of: {', '.join(sorted(supported_safety))}.")
     savings_pct = max(-100.0, (baseline - price) / baseline * 100)
     safety_bonus = {
         "official": 12,
@@ -528,11 +567,9 @@ def city_detail(slug: str):
     city = CITY_BY_SLUG.get(slug)
     if not city:
         return jsonify({"error": "City not found.", "available_slugs": sorted(CITY_BY_SLUG)}), 404
-    nights = parse_int("nights", 4, 1, 30)
     travelers = parse_int("travelers", 2, 1, 20)
     origin = request.args.get("origin")
-    start = parse_date(request.args.get("start"), date.fromisoformat(city["match_window"]["start"]))
-    end = parse_date(request.args.get("end"), start + timedelta(days=nights))
+    start, end, nights = parse_stay_window(date.fromisoformat(city["match_window"]["start"]), 4)
     return jsonify(
         {
             "city": city,
@@ -568,13 +605,11 @@ def search_deals():
         raise ValueError(f"Unknown city '{city_slug}'. Use /cities for supported slugs.")
 
     travelers = parse_int("travelers", 2, 1, 20)
-    nights = parse_int("nights", 5, 1, 30)
-    start = parse_date(request.args.get("start"), date.fromisoformat(city["match_window"]["start"]))
-    end = parse_date(request.args.get("end"), start + timedelta(days=nights))
+    start, end, nights = parse_stay_window(date.fromisoformat(city["match_window"]["start"]), 5)
     budget = request.args.get("budget")
-    budget_value = float(budget) if budget else None
+    budget_value = parse_positive_float("budget") if budget else None
     baseline = city_baseline(city, nights=nights, travelers=travelers, origin=origin)
-    estimated = budget_value or baseline["estimated_total"]
+    estimated = budget_value if budget_value is not None else baseline["estimated_total"]
 
     suggestions = []
     for delta, label, price_factor in [
@@ -627,8 +662,8 @@ def search_deals():
 
 @app.get("/score")
 def score():
-    price = float(request.args.get("price", "0"))
-    baseline = float(request.args.get("baseline", "0"))
+    price = parse_positive_float("price")
+    baseline = parse_positive_float("baseline")
     safety = request.args.get("safety", "official_or_direct")
     return jsonify({"deal_score": deal_score(price, baseline, safety)})
 
@@ -639,10 +674,10 @@ def pricing_recommendation():
         {
             "rapidapi_plans": [
                 {
-                    "name": "Basic",
-                    "price_usd_monthly": 0,
-                    "quota": "25 requests/month hard limit",
-                    "buyer": "integration evaluation only",
+                    "name": "Starter",
+                    "price_usd_monthly": 4.99,
+                    "quota": "1,000 requests/month",
+                    "buyer": "paid integration and small projects",
                 },
                 {
                     "name": "Pro",
@@ -664,8 +699,7 @@ def pricing_recommendation():
                 },
             ],
             "note": (
-                "Keep the Basic plan small enough for integration evaluation only. "
-                "Direct backend access remains blocked by the paid gateway secret."
+                "Every plan is paid. Direct backend access remains blocked by the paid gateway secret."
             ),
         }
     )
@@ -673,4 +707,4 @@ def pricing_recommendation():
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", "5000"))
-    app.run(host="0.0.0.0", port=port)
+    app.run(host="0.0.0.0", port=port)  # nosec B104

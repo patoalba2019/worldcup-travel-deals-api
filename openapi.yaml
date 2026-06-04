@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: WorldCupTravelDealsAPI
-  version: 1.1.0
+  version: 1.2.0
   description: >
     FIFA World Cup 2026 travel planning and deal-scoring API for agencies,
     apps, newsletters, no-code builders, and AI agents. Includes host-city
@@ -11,14 +11,6 @@ info:
     ticket inventory.
 servers:
   - url: https://worldcup-travel-deals-api.onrender.com
-components:
-  securitySchemes:
-    PaidGatewaySecret:
-      type: apiKey
-      in: header
-      name: X-RapidAPI-Proxy-Secret
-security:
-  - PaidGatewaySecret: []
 tags:
   - name: Travel Deals
   - name: Host Cities
@@ -45,7 +37,7 @@ paths:
               example:
                 status: ok
                 api: WorldCupTravelDealsAPI
-                version: 1.1.0
+                version: 1.2.0
                 host_city_count: 16
                 inventory_disclosure:
                   mode: planning_links_and_heuristic_baselines
