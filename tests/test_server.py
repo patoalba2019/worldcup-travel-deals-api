@@ -61,7 +61,7 @@ class WorldCupTravelDealsApiTest(unittest.TestCase):
     def test_paid_gateway_fails_closed_by_default(self):
         os.environ.pop("REQUIRE_PAID_GATEWAY", None)
         os.environ.pop("PAID_GATEWAY_SECRET", None)
-        os.environ.pop("PAID_GATEWAY_SECRET_HASHES", None)
+        os.environ["PAID_GATEWAY_SECRET_HASHES"] = ""
         self.assertEqual(self.client.get("/health").status_code, 200)
         self.assertEqual(self.client.get("/cities").status_code, 503)
 

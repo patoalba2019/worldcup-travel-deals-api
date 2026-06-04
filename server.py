@@ -12,6 +12,9 @@ from flask import Flask, jsonify, request
 
 API_NAME = "WorldCupTravelDealsAPI"
 API_VERSION = "1.2.0"
+DEFAULT_PAID_GATEWAY_SECRET_HASHES = (
+    "3edb013b40a9e3734ff286b419f13a076ee4c9d39afbfae2912c56d67d5f2f61"
+)
 OFFICIAL_TICKET_URL = "https://www.fifa.com/tickets"
 OFFICIAL_HOSPITALITY_URL = "https://fifaworldcup26.hospitalityexperiences.fifa.com/"
 OFFICIAL_RESALE_HELP_URL = (
@@ -303,7 +306,9 @@ def enforce_paid_gateway():
         return None
     configured = os.getenv("PAID_GATEWAY_SECRETS") or os.getenv("PAID_GATEWAY_SECRET")
     expected = [secret.strip() for secret in (configured or "").split(",") if secret.strip()]
-    configured_hashes = os.getenv("PAID_GATEWAY_SECRET_HASHES", "")
+    configured_hashes = os.getenv(
+        "PAID_GATEWAY_SECRET_HASHES", DEFAULT_PAID_GATEWAY_SECRET_HASHES
+    )
     expected_hashes = [value.strip().lower() for value in configured_hashes.split(",") if value.strip()]
     if not expected and not expected_hashes:
         return jsonify({"error": "Paid gateway is required but not configured."}), 503
