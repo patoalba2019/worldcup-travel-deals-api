@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Build a Remote Jobs Search Experience | patoapis</title>
+    <meta
+      name="description"
+      content="A practical guide to building a remote-jobs search workflow with normalized data, filters, pagination, cache metadata, and source attribution."
+    >
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://patoapis-marketplace.onrender.com/guides/remote-jobs-search.html">
+    <link rel="stylesheet" href="../styles.css">
+    <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+    <script src="../app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="../index.html" aria-label="patoapis home">
+        <span class="brand-mark">p</span>
+        <span>patoapis</span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="../index.html#apis">APIs</a>
+        <a href="../index.html#proof">Reliability</a>
+        <a href="../index.html#faq">FAQ</a>
+      </nav>
+      <a class="header-cta" href="https://rapidapi.com/patoalba2019/api/remotejobsapi">
+        Subscribe
+        <i data-lucide="external-link" aria-hidden="true"></i>
+      </a>
+    </header>
+
+    <main class="guide-main">
+      <section class="guide-hero">
+        <div class="guide-hero-inner">
+          <p class="eyebrow">RemoteJobsAPI integration guide</p>
+          <h1>Build a useful remote-jobs search experience</h1>
+          <p>
+            A normalized jobs feed removes source-specific cleanup work, but the
+            product experience still depends on good filters, transparent
+            freshness, and visible attribution.
+          </p>
+        </div>
+      </section>
+
+      <article class="guide-article">
+        <p class="guide-note">
+          Subscribe through RapidAPI and use the host and credentials displayed
+          in its Playground. Never place a RapidAPI key in browser-side code.
+        </p>
+
+        <h2>Start with a focused search</h2>
+        <p>
+          Combine a skill query with a candidate location and a small page size.
+          This produces a useful first result set without loading full job
+          descriptions.
+        </p>
+        <pre><code>GET /jobs?q=python&amp;location=latam&amp;limit=20&amp;sort=newest</code></pre>
+
+        <h2>Use the response metadata</h2>
+        <p>
+          Show users when the cached snapshot was updated, how many jobs matched,
+          and how many results were returned. The API also exposes source status
+          so your product can remain honest during temporary upstream failures.
+        </p>
+        <pre><code>{
+  "metadata": {
+    "updated_at": "2026-06-03T23:40:35+00:00",
+    "total": 42,
+    "returned": 20,
+    "sources": ["remoteok", "himalayas"]
+  }
+}</code></pre>
+
+        <h2>Design the next useful filters</h2>
+        <ul>
+          <li>Use <code>company</code> for employer-specific pages.</li>
+          <li>Use <code>tag</code> for skills such as React, Python, or sales.</li>
+          <li>Use <code>category</code> for broad discovery pages.</li>
+          <li>Use <code>offset</code> and <code>limit</code> for stable pagination.</li>
+        </ul>
+
+        <h2>Fetch details only when needed</h2>
+        <p>
+          The default list response omits full descriptions. Fetch
+          <code>/jobs/{job_id}</code> when a visitor opens an individual listing,
+          or set <code>include_description=true</code> only for controlled
+          server-side workflows.
+        </p>
+
+        <h2>Keep attribution visible</h2>
+        <p>
+          Every listing preserves the original application URL, source, and
+          source domain. Link users to the original posting and clearly identify
+          the source in your interface.
+        </p>
+
+        <div class="guide-cta">
+          <a
+            class="button primary"
+            href="https://rapidapi.com/patoalba2019/api/remotejobsapi"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Review RemoteJobsAPI on RapidAPI
+            <i data-lucide="external-link"></i>
+          </a>
+          <a class="button secondary" href="../index.html">Back to patoapis</a>
+        </div>
+      </article>
+    </main>
+  </body>
+</html>

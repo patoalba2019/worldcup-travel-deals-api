@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Build a World Cup 2026 City Comparison | patoapis</title>
+    <meta
+      name="description"
+      content="A practical guide to comparing World Cup 2026 host cities with structured travel-planning data, official links, reference estimates, and transparent scoring."
+    >
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://patoapis-marketplace.onrender.com/guides/world-cup-city-comparison.html">
+    <link rel="stylesheet" href="../styles.css">
+    <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+    <script src="../app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="../index.html" aria-label="patoapis home">
+        <span class="brand-mark">p</span>
+        <span>patoapis</span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="../index.html#apis">APIs</a>
+        <a href="../index.html#proof">Reliability</a>
+        <a href="../index.html#faq">FAQ</a>
+      </nav>
+      <a class="header-cta" href="https://rapidapi.com/patoalba2019/api/worldcuptraveldealsapi">
+        Subscribe
+        <i data-lucide="external-link" aria-hidden="true"></i>
+      </a>
+    </header>
+
+    <main class="guide-main">
+      <section class="guide-hero">
+        <div class="guide-hero-inner">
+          <p class="eyebrow">WorldCupTravelDealsAPI integration guide</p>
+          <h1>Build a World Cup 2026 host-city comparison</h1>
+          <p>
+            Help travelers compare destinations without pretending planning
+            estimates are live prices or sending ticket buyers toward unsafe
+            resale sources.
+          </p>
+        </div>
+      </section>
+
+      <article class="guide-article">
+        <p class="guide-note">
+          This API provides planning data, official links, provider search
+          routes, and heuristic reference estimates. It does not return live
+          fare, hotel, or ticket inventory.
+        </p>
+
+        <h2>Load the host-city catalog</h2>
+        <p>
+          Start with all cities or filter by a region to build destination
+          comparison pages for the United States, Mexico, or Canada.
+        </p>
+        <pre><code>GET /cities
+GET /cities?region=Mexico</code></pre>
+
+        <h2>Compare the signals that matter</h2>
+        <ul>
+          <li>Expected demand and tourism tier</li>
+          <li>Stadium, airports, region, and time zone</li>
+          <li>Flight, hotel, and local-spend reference tiers</li>
+          <li>Match-window dates and safe official ticket links</li>
+        </ul>
+
+        <h2>Generate a planning route</h2>
+        <p>
+          Use a traveler origin, destination city, trip date, nights, and party
+          size to generate provider search links and reference estimates.
+        </p>
+        <pre><code>GET /deals/search?origin=EZE&amp;city=miami&amp;start=2026-06-15&amp;nights=5&amp;travelers=2</code></pre>
+
+        <h2>Label estimates correctly</h2>
+        <p>
+          Package candidates include <code>is_live_offer: false</code> and
+          <code>pricing_type: heuristic_reference</code>. Preserve these
+          disclosures in your application. When you have a real offer, send its
+          price and your chosen baseline to <code>/score</code>.
+        </p>
+        <pre><code>GET /score?price=1900&amp;baseline=2400&amp;safety=official_or_direct</code></pre>
+
+        <h2>Route ticket demand safely</h2>
+        <p>
+          Use <code>/official-links</code> to direct buyers to FIFA official
+          ticketing, hospitality, and resale guidance. Avoid presenting
+          unofficial ticket inventory as verified.
+        </p>
+
+        <div class="guide-cta">
+          <a
+            class="button primary"
+            href="https://rapidapi.com/patoalba2019/api/worldcuptraveldealsapi"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Review WorldCupTravelDealsAPI on RapidAPI
+            <i data-lucide="external-link"></i>
+          </a>
+          <a class="button secondary" href="../index.html">Back to patoapis</a>
+        </div>
+      </article>
+    </main>
+  </body>
+</html>
