@@ -61,7 +61,22 @@
         "security": [],
         "responses": {
           "200": {
-            "description": "Runtime health and provider readiness"
+            "description": "Runtime health and provider readiness",
+            "content": {
+              "application/json": {
+                "example": {
+                  "status": "ok",
+                  "api": "WorldCupTravelDealsAPI",
+                  "version": "1.1.0",
+                  "host_city_count": 16,
+                  "inventory_disclosure": {
+                    "mode": "planning_links_and_heuristic_baselines",
+                    "contains_live_fares": false,
+                    "contains_live_hotel_availability": false
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -88,7 +103,32 @@
         ],
         "responses": {
           "200": {
-            "description": "Host cities"
+            "description": "Host cities",
+            "content": {
+              "application/json": {
+                "example": {
+                  "count": 1,
+                  "cities": [
+                    {
+                      "slug": "miami",
+                      "city": "Miami",
+                      "country": "United States",
+                      "region": "USA",
+                      "stadium": "Hard Rock Stadium",
+                      "airports": [
+                        "MIA",
+                        "FLL"
+                      ],
+                      "expected_demand": "very_high",
+                      "match_window": {
+                        "start": "2026-06-15",
+                        "end": "2026-07-18"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
           }
         }
       }
@@ -227,7 +267,53 @@
         ],
         "responses": {
           "200": {
-            "description": "Package candidates"
+            "description": "Package candidates",
+            "content": {
+              "application/json": {
+                "example": {
+                  "query": {
+                    "origin": "EZE",
+                    "city": "miami",
+                    "start": "2026-06-15",
+                    "end": "2026-06-20",
+                    "travelers": 2,
+                    "nights": 5,
+                    "budget": null
+                  },
+                  "inventory_disclosure": {
+                    "mode": "planning_links_and_heuristic_baselines",
+                    "contains_live_fares": false,
+                    "contains_live_hotel_availability": false
+                  },
+                  "baseline": {
+                    "currency": "USD",
+                    "flight_per_person": 1044,
+                    "hotel_per_room_night": 464,
+                    "local_daily_per_person": 181,
+                    "estimated_total": 6218,
+                    "method": "Heuristic event-travel baseline. Use /score to compare real offers from your providers."
+                  },
+                  "results": [
+                    {
+                      "type": "package_search",
+                      "label": "event_window",
+                      "city": "miami",
+                      "origin": "EZE",
+                      "start": "2026-06-15",
+                      "end": "2026-06-20",
+                      "travelers": 2,
+                      "estimated_reference_price": 6218,
+                      "pricing_type": "heuristic_reference",
+                      "is_live_offer": false,
+                      "deal_score": {
+                        "score": 64,
+                        "label": "fair"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
           }
         }
       }
@@ -272,7 +358,21 @@
         ],
         "responses": {
           "200": {
-            "description": "Deal score"
+            "description": "Deal score",
+            "content": {
+              "application/json": {
+                "example": {
+                  "deal_score": {
+                    "score": 94.5,
+                    "label": "excellent",
+                    "savings_percent": 25,
+                    "baseline": 1200,
+                    "price": 900,
+                    "safety": "official"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -285,7 +385,18 @@
         "summary": "Official ticketing and hospitality links",
         "responses": {
           "200": {
-            "description": "Official FIFA ticketing safety links"
+            "description": "Official FIFA ticketing safety links",
+            "content": {
+              "application/json": {
+                "example": {
+                  "ticketing": {
+                    "official_tickets": "https://www.fifa.com/tickets",
+                    "official_hospitality": "https://fifaworldcup26.hospitalityexperiences.fifa.com/"
+                  },
+                  "warning": "Avoid unofficial ticket sellers unless the buyer understands transfer, resale, and fraud risk."
+                }
+              }
+            }
           }
         }
       }
