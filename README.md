@@ -83,3 +83,7 @@ python server.py
 ```bash
 python3 -m unittest discover -s tests
 ```
+
+## License
+
+Proprietary software. All rights reserved. See [LICENSE](LICENSE).
