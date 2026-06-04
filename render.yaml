@@ -12,7 +12,7 @@ services:
       - key: PAID_GATEWAY_SECRET
         generateValue: true
   - type: web
-    name: patoapis-marketplace
+    name: patoapis-paid-apis
     runtime: static
     buildCommand: echo "Static marketplace ready"
     staticPublishPath: ./marketing
