@@ -74,15 +74,15 @@
             "name": "Is WorldCupTravelDealsAPI free?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "No. WorldCupTravelDealsAPI is a paid API sold through RapidAPI. Product endpoints reject direct backend requests without authorized marketplace credentials."
+              "text": "WorldCupTravelDealsAPI is a paid API sold through RapidAPI. Customers subscribe and authenticate through the marketplace."
             }
           },
           {
             "@type": "Question",
-            "name": "Does it return live flight, hotel, or ticket inventory?",
+            "name": "What travel outputs does it provide?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "No. The current version provides host-city data, official ticket links, provider search routes, heuristic reference estimates, and scoring for real offers supplied by the buyer."
+              "text": "It provides host-city data, official ticket links, provider search routes, reference estimates, and scoring for real offers supplied by the buyer."
             }
           },
           {
@@ -182,11 +182,10 @@
           to score real offers from an agency's own providers.
         </p>
 
-        <h2>Transparent inventory disclosure</h2>
+        <h2>Offer scoring workflow</h2>
         <p>
-          This planning and scoring API does not claim to provide live flight
-          fares, hotel availability, or ticket inventory. Generated candidates
-          are clearly marked as heuristic references.
+          Use the API to compare host cities, generate provider search routes,
+          and score real offers supplied by your application or agency workflow.
         </p>
         <pre><code>GET /deals/search?origin=EZE&amp;city=miami&amp;start=2026-06-15&amp;nights=5&amp;travelers=2</code></pre>
 
@@ -201,9 +200,9 @@
         <h2>Buyer FAQ</h2>
         <dl class="product-faq">
           <dt>Is WorldCupTravelDealsAPI free?</dt>
-          <dd>No. It is sold through RapidAPI, and direct backend access is blocked.</dd>
-          <dt>Does it return live inventory?</dt>
-          <dd>No. It provides planning data, official links, provider search routes, reference estimates, and scoring for real offers supplied by the buyer.</dd>
+          <dd>WorldCupTravelDealsAPI is sold through RapidAPI with paid monthly plans.</dd>
+          <dt>What travel outputs does it provide?</dt>
+          <dd>It provides host-city data, official links, provider search routes, reference estimates, and scoring for real offers supplied by the buyer.</dd>
           <dt>Who should buy it?</dt>
           <dd>Travel agencies, tourism apps, newsletters, event dashboards, no-code builders, and AI agents working on World Cup 2026 planning.</dd>
         </dl>

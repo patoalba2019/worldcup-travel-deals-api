@@ -80,7 +80,7 @@
                 "name": "Can I call the Render backend directly?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "No. Product endpoints require a private marketplace gateway secret. Only lightweight health monitoring is publicly reachable."
+                  "text": "Customers subscribe and authenticate through RapidAPI. Product endpoints require the authorized marketplace gateway credential."
                 }
               }
             ]
@@ -201,7 +201,7 @@
               <li><i data-lucide="check"></i> All 16 host cities, airports, stadiums, and travel windows</li>
               <li><i data-lucide="check"></i> Official FIFA ticketing, hospitality, and resale guidance</li>
               <li><i data-lucide="check"></i> Flight and hotel search routes plus deal-scoring logic</li>
-              <li><i data-lucide="info"></i> Planning data and estimates, not live fare or ticket inventory</li>
+              <li><i data-lucide="check"></i> Host-city intelligence for travel dashboards and AI assistants</li>
             </ul>
             <div class="use-cases">
               <span>Travel dashboards</span>
@@ -245,7 +245,7 @@
               <li><i data-lucide="check"></i> Fresh cached listings from Jobicy and Himalayas</li>
               <li><i data-lucide="check"></i> Search, filters, pagination, details, and statistics</li>
               <li><i data-lucide="check"></i> Original application URLs and visible source attribution</li>
-              <li><i data-lucide="check"></i> Last successful snapshot survives temporary source outages</li>
+              <li><i data-lucide="check"></i> OpenAPI documentation and production health monitoring</li>
             </ul>
             <div class="use-cases">
               <span>Job boards</span>
@@ -379,16 +379,16 @@
           <details>
             <summary>Can I call the Render backend directly?</summary>
             <p>
-              No. Product endpoints require a private marketplace gateway
-              secret. Only lightweight health monitoring is publicly reachable.
+              Customers subscribe and authenticate through RapidAPI. Product
+              endpoints require the authorized marketplace gateway credential.
             </p>
           </details>
           <details>
-            <summary>Does the travel API return live ticket or fare inventory?</summary>
+            <summary>What does the travel API provide?</summary>
             <p>
-              No. It provides planning data, official links, provider search
-              routes, heuristic reference estimates, and scoring for real offers
-              supplied by your application.
+              It provides host-city data, official links, provider search
+              routes, reference estimates, and scoring for real offers supplied
+              by your application.
             </p>
           </details>
           <details>
