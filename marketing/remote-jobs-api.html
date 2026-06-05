@@ -8,6 +8,22 @@
       name="description"
       content="Paid Remote Jobs API with normalized listings, search, filters, pagination, stats, source attribution, and resilient caching. Plans start at $4.99."
     >
+    <meta name="keywords" content="remote jobs API, jobs API, recruiting API, job board API, AI recruiting data, RapidAPI remote jobs">
+    <meta property="og:type" content="product">
+    <meta property="og:title" content="RemoteJobsAPI | Paid Remote Jobs API">
+    <meta
+      property="og:description"
+      content="Normalized remote-job listings with search, filters, pagination, source attribution, and resilient caching. Subscribe through RapidAPI."
+    >
+    <meta property="og:url" content="https://patoapis-paid-apis.onrender.com/remote-jobs-api.html">
+    <meta property="og:image" content="https://patoapis-paid-apis.onrender.com/assets/remotejobs-api-logo.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="RemoteJobsAPI | Paid Remote Jobs API">
+    <meta
+      name="twitter:description"
+      content="Remote-job data for job boards, recruiting tools, AI agents, dashboards, and automation."
+    >
+    <meta name="twitter:image" content="https://patoapis-paid-apis.onrender.com/assets/remotejobs-api-logo.png">
     <meta name="robots" content="index,follow">
     <link rel="canonical" href="https://patoapis-paid-apis.onrender.com/remote-jobs-api.html">
     <link rel="stylesheet" href="styles.css">
@@ -16,17 +32,36 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Product",
-        "name": "RemoteJobsAPI",
-        "description": "Normalized remote job listings for job boards, recruiting tools, AI agents, and automation.",
-        "brand": {"@type": "Brand", "name": "patoapis"},
-        "offers": {
-          "@type": "Offer",
-          "price": "4.99",
-          "priceCurrency": "USD",
-          "availability": "https://schema.org/InStock",
-          "url": "https://rapidapi.com/patoalba2019/api/remotejobsapi"
-        }
+        "@graph": [
+          {
+            "@type": "Product",
+            "name": "RemoteJobsAPI",
+            "description": "Normalized remote job listings for job boards, recruiting tools, AI agents, and automation.",
+            "brand": {"@type": "Brand", "name": "patoapis"},
+            "offers": {
+              "@type": "Offer",
+              "price": "4.99",
+              "priceCurrency": "USD",
+              "availability": "https://schema.org/InStock",
+              "url": "https://rapidapi.com/patoalba2019/api/remotejobsapi"
+            }
+          },
+          {
+            "@type": "WebAPI",
+            "name": "RemoteJobsAPI",
+            "description": "Paid API for normalized remote-job listings, filters, pagination, job details, stats, freshness metadata, and source attribution.",
+            "documentation": "https://patoapis-paid-apis.onrender.com/remote-jobs-api.html",
+            "termsOfService": "https://rapidapi.com/patoalba2019/api/remotejobsapi",
+            "provider": {"@type": "Organization", "name": "patoapis"}
+          },
+          {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {"@type": "ListItem", "position": 1, "name": "patoapis", "item": "https://patoapis-paid-apis.onrender.com/"},
+              {"@type": "ListItem", "position": 2, "name": "RemoteJobsAPI", "item": "https://patoapis-paid-apis.onrender.com/remote-jobs-api.html"}
+            ]
+          }
+        ]
       }
     </script>
     <script type="application/ld+json">
