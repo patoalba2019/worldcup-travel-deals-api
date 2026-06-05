@@ -425,10 +425,6 @@ h3 {
   color: var(--green);
 }
 
-.feature-list li:last-child svg {
-  color: var(--red);
-}
-
 .use-cases {
   display: flex;
   flex-wrap: wrap;
