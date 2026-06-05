@@ -835,6 +835,26 @@ footer p {
   border-radius: 6px;
 }
 
+.product-faq {
+  display: grid;
+  gap: 12px;
+  margin: 18px 0 0;
+  padding: 0;
+}
+
+.product-faq dt {
+  margin-top: 10px;
+  color: var(--ink);
+  font-weight: 800;
+}
+
+.product-faq dd {
+  margin: 0;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.65;
+}
+
 @media (max-width: 800px) {
   .site-header {
     gap: 12px;

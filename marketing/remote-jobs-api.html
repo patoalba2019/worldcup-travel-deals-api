@@ -29,6 +29,38 @@
         }
       }
     </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Is RemoteJobsAPI free?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. RemoteJobsAPI is a paid API sold through RapidAPI. Product endpoints reject direct backend requests without authorized marketplace credentials."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What makes it different from using public feeds directly?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "RemoteJobsAPI normalizes different source schemas, adds search and filters, keeps source attribution, and serves a last-successful cached snapshot when an upstream source has a temporary issue."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does it return real job listings?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. The production API currently serves cached remote job listings from Jobicy and Himalayas with original application URLs and source metadata."
+            }
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <header class="site-header">
@@ -130,6 +162,16 @@
           <article class="plan"><span>Ultra</span><strong>$29</strong><p>50,000 requests/month</p></article>
           <article class="plan"><span>Mega</span><strong>$79</strong><p>200,000 requests/month</p></article>
         </div>
+
+        <h2>Buyer FAQ</h2>
+        <dl class="product-faq">
+          <dt>Is RemoteJobsAPI free?</dt>
+          <dd>No. It is sold through RapidAPI, and direct backend access is blocked.</dd>
+          <dt>Does it return real listings?</dt>
+          <dd>Yes. It currently serves cached listings from Jobicy and Himalayas with source attribution and original application URLs.</dd>
+          <dt>Why pay for it?</dt>
+          <dd>Buyers get one stable contract instead of maintaining separate parsers, filters, deduplication, attribution handling, and cache behavior.</dd>
+        </dl>
       </article>
     </main>
   </body>
