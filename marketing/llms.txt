@@ -41,7 +41,7 @@ flags and webhook normalization. Commercial endpoints require an authorized
 paid marketplace gateway.
 
 Product page: https://patoapis-paid-apis.onrender.com/omnireply-ai-api.html
-RapidAPI setup: https://rapidapi.com/patoalba2019/api/omnireplyaiapi
+Paid RapidAPI access: https://rapidapi.com/patoalba2019/api/worldcuptraveldealsapi
 
 ## Commercial access
 
