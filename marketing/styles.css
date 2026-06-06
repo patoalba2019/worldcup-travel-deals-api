@@ -806,6 +806,67 @@ footer p {
   padding: 64px 5vw 86px;
 }
 
+.content-panel {
+  padding: 24px;
+  margin-bottom: 28px;
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.product-page-content .content-panel h2 {
+  margin-top: 0;
+}
+
+.content-panel p:last-child,
+.content-panel .feature-list {
+  margin-bottom: 0;
+}
+
+.api-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin: 28px 0;
+}
+
+.api-card {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 12px 30px rgba(25, 44, 70, 0.06);
+}
+
+.product-page-content .api-card h2 {
+  margin-top: 0;
+  font-size: 25px;
+  overflow-wrap: anywhere;
+}
+
+.api-card p:not(.eyebrow) {
+  margin-bottom: 24px;
+}
+
+.api-card .button {
+  margin-top: auto;
+}
+
+.jobs-eyebrow {
+  color: var(--green);
+}
+
+.product-eyebrow {
+  color: var(--blue-dark);
+}
+
+.deals-eyebrow {
+  color: #7c3aed;
+}
+
 .product-page-content h2 {
   margin-top: 54px;
   font-size: 30px;
@@ -896,6 +957,7 @@ footer p {
   }
 
   .product-grid,
+  .api-grid,
   .proof-inner,
   .status-inner,
   .product-page-hero-inner {
