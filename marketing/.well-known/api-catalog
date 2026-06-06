@@ -74,6 +74,33 @@
           "type": "application/json"
         }
       ]
+    },
+    {
+      "anchor": "https://omnireplyaiapi.p.rapidapi.com",
+      "service-desc": [
+        {
+          "href": "https://worldcup-travel-deals-api.onrender.com/omni/openapi.json",
+          "type": "application/vnd.oai.openapi+json;version=3.0"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://patoapis-paid-apis.onrender.com/omnireply-ai-api.html",
+          "type": "text/html"
+        }
+      ],
+      "service-meta": [
+        {
+          "href": "https://patoapis-paid-apis.onrender.com/apis.json",
+          "type": "application/json"
+        }
+      ],
+      "status": [
+        {
+          "href": "https://worldcup-travel-deals-api.onrender.com/omni/health",
+          "type": "application/json"
+        }
+      ]
     }
   ]
 }

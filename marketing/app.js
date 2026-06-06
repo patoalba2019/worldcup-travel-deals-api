@@ -16,6 +16,10 @@ document.addEventListener("DOMContentLoaded", () => {
       url: "https://global-deal-radar-api.onrender.com/health",
       detail: (data) => `${data.cache?.deal_count ?? "Live"} deal signals ready`,
     },
+    omnireply: {
+      url: "https://worldcup-travel-deals-api.onrender.com/omni/health",
+      detail: (data) => `${data.channels?.length ?? 8} channels ready`,
+    },
   };
 
   document.querySelectorAll("[data-status]").forEach(async (element) => {

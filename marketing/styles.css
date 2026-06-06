@@ -287,7 +287,7 @@ h3 {
 
 .status-list {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
 }
 
@@ -402,6 +402,10 @@ h3 {
   color: #7c3aed;
 }
 
+.omni .product-type {
+  color: #0f766e;
+}
+
 .product-lead {
   color: var(--muted);
   font-size: 17px;
@@ -468,6 +472,10 @@ h3 {
 
 .deals-button {
   background: #7c3aed;
+}
+
+.omni-button {
+  background: #0f766e;
 }
 
 .guide-link {
@@ -867,6 +875,10 @@ footer p {
   color: #7c3aed;
 }
 
+.omni-eyebrow {
+  color: #0f766e;
+}
+
 .product-page-content h2 {
   margin-top: 54px;
   font-size: 30px;
@@ -884,6 +896,10 @@ footer p {
   gap: 14px;
   padding: 0;
   list-style: none;
+}
+
+.single-status {
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .buyer-grid li {

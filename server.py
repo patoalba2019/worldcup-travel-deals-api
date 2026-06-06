@@ -9,6 +9,8 @@ from urllib.parse import quote_plus
 
 from flask import Flask, jsonify, request
 
+from omnireply import omni_blueprint
+
 
 API_NAME = "WorldCupTravelDealsAPI"
 API_VERSION = "1.2.0"
@@ -286,6 +288,7 @@ CITY_BY_SLUG = {city["slug"]: city for city in HOST_CITIES}
 
 
 app = Flask(__name__)
+app.register_blueprint(omni_blueprint)
 
 
 @app.after_request
@@ -300,7 +303,8 @@ def add_cors_headers(response):
 
 @app.before_request
 def enforce_paid_gateway():
-    if request.method == "OPTIONS" or request.path == "/health":
+    public_paths = {"/health", "/omni/health", "/omni/openapi.json"}
+    if request.method == "OPTIONS" or request.path in public_paths:
         return None
     if os.getenv("REQUIRE_PAID_GATEWAY", "true").lower() not in {"1", "true", "yes"}:
         return None
@@ -316,6 +320,7 @@ def enforce_paid_gateway():
         request.headers.get("X-RapidAPI-Proxy-Secret")
         or request.headers.get("X-API-Gateway-Secret")
         or request.headers.get("X-WorldCupTravelDeals-Secret")
+        or request.headers.get("X-OmniReplyAI-Secret")
         or ""
     )
     provided_hash = hashlib.sha256(provided.encode("utf-8")).hexdigest()

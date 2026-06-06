@@ -1,6 +1,6 @@
 {
   "name": "patoapis API Catalog",
-  "description": "Paid API products for remote-job data, World Cup 2026 travel planning, and global deal intelligence, sold and authenticated through RapidAPI.",
+  "description": "Paid API products for remote-job data, World Cup 2026 travel planning, global deal intelligence, and multilingual AI business replies, sold and authenticated through RapidAPI.",
   "url": "https://patoapis-paid-apis.onrender.com/apis.json",
   "created": "2026-06-04",
   "modified": "2026-06-06",
@@ -13,7 +13,9 @@
     "travel",
     "deal intelligence",
     "shopping deals",
-    "AI agents"
+    "AI agents",
+    "customer support",
+    "business messaging"
   ],
   "apis": [
     {
@@ -125,6 +127,44 @@
         {
           "type": "Status",
           "url": "https://global-deal-radar-api.onrender.com/health"
+        }
+      ]
+    },
+    {
+      "aid": "patoapis-paid-apis.onrender.com:omnireplyaiapi",
+      "name": "OmniReplyAIAPI",
+      "description": "Multilingual AI reply API for WhatsApp, Telegram, Messenger, Instagram, webchat, SMS and email customer-service workflows.",
+      "image": "https://patoapis-paid-apis.onrender.com/assets/omnireply-ai-logo.png",
+      "humanURL": "https://patoapis-paid-apis.onrender.com/omnireply-ai-api.html",
+      "baseURL": "https://worldcup-travel-deals-api.onrender.com/omni",
+      "tags": [
+        "AI replies",
+        "WhatsApp bot",
+        "Telegram bot",
+        "customer support",
+        "business messaging",
+        "multilingual chatbot"
+      ],
+      "properties": [
+        {
+          "type": "Documentation",
+          "url": "https://patoapis-paid-apis.onrender.com/omnireply-ai-api.html"
+        },
+        {
+          "type": "OpenAPI",
+          "url": "https://worldcup-travel-deals-api.onrender.com/omni/openapi.json"
+        },
+        {
+          "type": "Pricing",
+          "url": "https://rapidapi.com/patoalba2019/api/omnireplyaiapi"
+        },
+        {
+          "type": "Signup",
+          "url": "https://rapidapi.com/patoalba2019/api/omnireplyaiapi"
+        },
+        {
+          "type": "Status",
+          "url": "https://worldcup-travel-deals-api.onrender.com/omni/health"
         }
       ]
     }
