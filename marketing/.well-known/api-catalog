@@ -53,6 +53,27 @@
           "type": "application/json"
         }
       ]
+    },
+    {
+      "anchor": "https://globaldealradarapi.p.rapidapi.com",
+      "service-doc": [
+        {
+          "href": "https://patoapis-paid-apis.onrender.com/global-deal-radar-api.html",
+          "type": "text/html"
+        }
+      ],
+      "service-meta": [
+        {
+          "href": "https://patoapis-paid-apis.onrender.com/apis.json",
+          "type": "application/json"
+        }
+      ],
+      "status": [
+        {
+          "href": "https://global-deal-radar-api.onrender.com/health",
+          "type": "application/json"
+        }
+      ]
     }
   ]
 }

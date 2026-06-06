@@ -12,6 +12,10 @@ document.addEventListener("DOMContentLoaded", () => {
       url: "https://worldcup-travel-deals-api.onrender.com/health",
       detail: (data) => `${data.host_city_count ?? 16} host cities ready`,
     },
+    globaldeals: {
+      url: "https://global-deal-radar-api.onrender.com/health",
+      detail: (data) => `${data.cache?.deal_count ?? "Live"} deal signals ready`,
+    },
   };
 
   document.querySelectorAll("[data-status]").forEach(async (element) => {

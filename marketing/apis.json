@@ -1,16 +1,19 @@
 {
   "name": "patoapis API Catalog",
-  "description": "Paid API products for remote-job data and World Cup 2026 travel planning, sold and authenticated through RapidAPI.",
+  "description": "Paid API products for remote-job data, World Cup 2026 travel planning, and global deal intelligence, sold and authenticated through RapidAPI.",
   "url": "https://patoapis-paid-apis.onrender.com/apis.json",
   "created": "2026-06-04",
-  "modified": "2026-06-04",
+  "modified": "2026-06-06",
   "specificationVersion": "0.20",
   "tags": [
     "paid APIs",
     "RapidAPI",
     "remote jobs",
     "World Cup 2026",
-    "travel"
+    "travel",
+    "deal intelligence",
+    "shopping deals",
+    "AI agents"
   ],
   "apis": [
     {
@@ -84,6 +87,44 @@
         {
           "type": "Status",
           "url": "https://worldcup-travel-deals-api.onrender.com/health"
+        }
+      ]
+    },
+    {
+      "aid": "patoapis-paid-apis.onrender.com:globaldealradarapi",
+      "name": "GlobalDealRadarAPI",
+      "description": "Global deal intelligence with normalized public deal signals, source attribution, categories, pricing fields, scoring, search, filters and stats.",
+      "image": "https://patoapis-paid-apis.onrender.com/assets/global-deal-radar-logo.png",
+      "humanURL": "https://patoapis-paid-apis.onrender.com/global-deal-radar-api.html",
+      "baseURL": "https://globaldealradarapi.p.rapidapi.com",
+      "tags": [
+        "deals",
+        "discounts",
+        "shopping",
+        "AI agents",
+        "newsletters",
+        "digital products"
+      ],
+      "properties": [
+        {
+          "type": "Documentation",
+          "url": "https://patoapis-paid-apis.onrender.com/global-deal-radar-api.html"
+        },
+        {
+          "type": "OpenAPI",
+          "url": "https://global-deal-radar-api.onrender.com/openapi.json"
+        },
+        {
+          "type": "Pricing",
+          "url": "https://rapidapi.com/patoalba2019/api/globaldealradarapi"
+        },
+        {
+          "type": "Signup",
+          "url": "https://rapidapi.com/patoalba2019/api/globaldealradarapi"
+        },
+        {
+          "type": "Status",
+          "url": "https://global-deal-radar-api.onrender.com/health"
         }
       ]
     }
