@@ -1,9 +1,9 @@
 {
   "name": "patoapis API Catalog",
-  "description": "Paid API products for remote-job data, World Cup 2026 travel planning, global deal intelligence, and multilingual AI business replies, sold and authenticated through RapidAPI.",
+  "description": "Paid API products for remote-job data, World Cup 2026 travel planning, global deal intelligence, and multilingual AI business replies. Active marketplace listings link to their matching RapidAPI products; each product page documents the current access path.",
   "url": "https://patoapis-paid-apis.onrender.com/apis.json",
   "created": "2026-06-04",
-  "modified": "2026-06-06",
+  "modified": "2026-06-11",
   "specificationVersion": "0.20",
   "tags": [
     "paid APIs",
@@ -156,11 +156,11 @@
         },
         {
           "type": "Pricing",
-          "url": "https://rapidapi.com/patoalba2019/api/worldcuptraveldealsapi"
+          "url": "https://patoapis-paid-apis.onrender.com/omnireply-ai-api.html"
         },
         {
           "type": "Signup",
-          "url": "https://rapidapi.com/patoalba2019/api/worldcuptraveldealsapi"
+          "url": "https://patoapis-paid-apis.onrender.com/omnireply-ai-api.html"
         },
         {
           "type": "Status",

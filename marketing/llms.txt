@@ -1,6 +1,8 @@
 # patoapis
 
-Paid API products sold through RapidAPI.
+Paid API products with protected production endpoints. Active marketplace
+listings link to their matching RapidAPI products, and each product page shows
+the current commercial access path.
 
 Machine-readable catalog: https://patoapis-paid-apis.onrender.com/apis.json
 RFC 9727 API catalog: https://patoapis-paid-apis.onrender.com/.well-known/api-catalog
@@ -30,7 +32,7 @@ Purchase: https://rapidapi.com/patoalba2019/api/worldcuptraveldealsapi
 Global deal intelligence for apps, newsletters, dashboards, shopping tools and AI agents. It normalizes public deal signals with categories, scoring, price fields, source attribution, search, filters and stats. Product data endpoints require an authorized paid marketplace gateway.
 
 Product page: https://patoapis-paid-apis.onrender.com/global-deal-radar-api.html
-Product page: https://patoapis-paid-apis.onrender.com/global-deal-radar-api.html
+Commercial access: https://patoapis-paid-apis.onrender.com/global-deal-radar-api.html
 
 ## OmniReplyAIAPI
 
@@ -41,7 +43,7 @@ flags and webhook normalization. Commercial endpoints require an authorized
 paid marketplace gateway.
 
 Product page: https://patoapis-paid-apis.onrender.com/omnireply-ai-api.html
-Paid RapidAPI access: https://rapidapi.com/patoalba2019/api/worldcuptraveldealsapi
+Commercial access: https://patoapis-paid-apis.onrender.com/omnireply-ai-api.html
 
 ## Commercial access
 
