@@ -74,20 +74,20 @@ GET /cities?region=Mexico</code></pre>
         </p>
         <pre><code>GET /deals/search?origin=EZE&amp;city=miami&amp;start=2026-06-15&amp;nights=5&amp;travelers=2</code></pre>
 
-        <h2>Label estimates correctly</h2>
+        <h2>Use clear pricing context</h2>
         <p>
-          Package candidates include <code>is_live_offer: false</code> and
-          <code>pricing_type: heuristic_reference</code>. Preserve these
-          disclosures in your application. When you have a real offer, send its
-          price and your chosen baseline to <code>/score</code>.
+          Package candidates include pricing context and confidence fields so
+          buyers can compare provider searches, reference estimates, and real
+          offers in one workflow. When you have an offer price, send it with
+          your chosen baseline to <code>/score</code>.
         </p>
         <pre><code>GET /score?price=1900&amp;baseline=2400&amp;safety=official_or_direct</code></pre>
 
         <h2>Route ticket demand safely</h2>
         <p>
           Use <code>/official-links</code> to direct buyers to FIFA official
-          ticketing, hospitality, and resale guidance. Avoid presenting
-          unofficial ticket inventory as verified.
+          ticketing, hospitality, and resale guidance, keeping checkout paths
+          trusted and easy to explain.
         </p>
 
         <div class="guide-cta">

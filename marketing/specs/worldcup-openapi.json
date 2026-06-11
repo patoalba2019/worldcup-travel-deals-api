@@ -65,11 +65,14 @@
                   "api": "WorldCupTravelDealsAPI",
                   "version": "1.2.0",
                   "host_city_count": 16,
-                  "inventory_disclosure": {
-                    "mode": "planning_links_and_heuristic_baselines",
-                    "contains_live_fares": false,
-                    "contains_live_hotel_availability": false
-                  }
+                  "paid_gateway_required": true,
+                  "product_data_access": "paid_marketplace_gateway_required",
+                  "capabilities": [
+                    "host_city_coverage",
+                    "official_ticketing_links",
+                    "travel_provider_search_routes",
+                    "offer_scoring"
+                  ]
                 }
               }
             }
@@ -276,10 +279,10 @@
                     "nights": 5,
                     "budget": null
                   },
-                  "inventory_disclosure": {
-                    "mode": "planning_links_and_heuristic_baselines",
-                    "contains_live_fares": false,
-                    "contains_live_hotel_availability": false
+                  "pricing_context": {
+                    "mode": "provider_search_routes_and_reference_estimates",
+                    "confidence": "reference_estimate",
+                    "best_use": "compare buyer-supplied offers and provider searches"
                   },
                   "baseline": {
                     "currency": "USD",
@@ -299,8 +302,8 @@
                       "end": "2026-06-20",
                       "travelers": 2,
                       "estimated_reference_price": 6218,
-                      "pricing_type": "heuristic_reference",
-                      "is_live_offer": false,
+                      "pricing_type": "reference_estimate",
+                      "confidence": "reference_estimate",
                       "deal_score": {
                         "score": 64,
                         "label": "fair"
@@ -389,7 +392,7 @@
                     "official_tickets": "https://www.fifa.com/tickets",
                     "official_hospitality": "https://fifaworldcup26.hospitalityexperiences.fifa.com/"
                   },
-                  "warning": "Avoid unofficial ticket sellers unless the buyer understands transfer, resale, and fraud risk."
+                  "buyer_note": "Use official FIFA ticketing, hospitality and resale guidance as the trusted checkout path."
                 }
               }
             }
