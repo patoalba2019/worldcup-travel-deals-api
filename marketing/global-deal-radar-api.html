@@ -42,8 +42,8 @@
               "@type": "Offer",
               "price": "2.99",
               "priceCurrency": "USD",
-              "availability": "https://schema.org/PreOrder",
-              "url": "https://rapidapi.com/patoalba2019/api/globaldealradarapi"
+              "availability": "https://schema.org/InStock",
+              "url": "https://patoapis-paid-apis.onrender.com/global-deal-radar-api.html"
             }
           },
           {
@@ -51,7 +51,7 @@
             "name": "GlobalDealRadarAPI",
             "description": "Paid API for worldwide deal discovery with normalized deal fields, categories, score, attribution, filters and stats.",
             "documentation": "https://patoapis-paid-apis.onrender.com/global-deal-radar-api.html",
-            "termsOfService": "https://rapidapi.com/patoalba2019/api/globaldealradarapi",
+            "termsOfService": "https://patoapis-paid-apis.onrender.com/global-deal-radar-api.html",
             "provider": {"@type": "Organization", "name": "patoapis"}
           },
           {
@@ -76,9 +76,9 @@
         <a href="index.html#pricing">Pricing</a>
         <a href="index.html#faq">FAQ</a>
       </nav>
-      <a class="header-cta" href="https://rapidapi.com/patoalba2019/api/globaldealradarapi?utm_source=patoapis_site&utm_medium=referral&utm_campaign=globaldeals_detail">
-        RapidAPI setup
-        <i data-lucide="external-link" aria-hidden="true"></i>
+      <a class="header-cta" href="https://global-deal-radar-api.onrender.com/health">
+        Live status
+        <i data-lucide="activity" aria-hidden="true"></i>
       </a>
     </header>
 
@@ -118,9 +118,9 @@
 
       <article class="product-page-content">
         <div class="guide-cta">
-          <a class="button primary" href="https://rapidapi.com/patoalba2019/api/globaldealradarapi?utm_source=patoapis_site&utm_medium=referral&utm_campaign=globaldeals_detail" target="_blank" rel="noopener noreferrer">
-            View RapidAPI setup
-            <i data-lucide="external-link"></i>
+          <a class="button primary" href="https://global-deal-radar-api.onrender.com/health" target="_blank" rel="noopener noreferrer">
+            Check live status
+            <i data-lucide="activity"></i>
           </a>
           <a class="button product-button deals-button" href="https://global-deal-radar-api.onrender.com/health" target="_blank" rel="noopener noreferrer">
             Check live health
@@ -140,14 +140,13 @@
           <li>Normalized public deal signals from multiple source types.</li>
           <li>Source attribution, original URLs, merchant/domain fields and tags.</li>
           <li>Price signals, discounts, scoring, categories, stats and pagination.</li>
-          <li>Paid gateway protection so product data is not available through free direct backend calls.</li>
+          <li>Protected production access for marketplace-based integrations.</li>
         </ul>
 
-        <h2>Security and current marketplace status</h2>
+        <h2>Commercial access model</h2>
         <p>
-          The backend is online and direct product-data access is blocked without
-          an authorized gateway secret. The RapidAPI listing still needs final
-          marketplace publication before buyers can reliably subscribe there.
+          The backend is online, health checks are public, and product-data
+          routes are designed for authorized marketplace gateway access.
         </p>
 
         <h2>Example requests</h2>
@@ -164,12 +163,12 @@ GET /search-links?q=black friday travel</code></pre>
 
         <h2>Buyer FAQ</h2>
         <dl class="product-faq">
-          <dt>Is GlobalDealRadarAPI free?</dt>
-          <dd>No. Product data endpoints require an authorized paid marketplace gateway.</dd>
+          <dt>How is GlobalDealRadarAPI accessed commercially?</dt>
+          <dd>Product data endpoints are designed for authorized paid marketplace gateway access.</dd>
           <dt>Does it return real public deal signals?</dt>
           <dd>Yes. It normalizes public APIs, RSS feeds, developer-market signals and curated resources, with source attribution.</dd>
-          <dt>Can customers call the Render backend directly?</dt>
-          <dd>No. Direct calls to product-data endpoints without the gateway secret receive Payment Required.</dd>
+          <dt>Can it support commercial products?</dt>
+          <dd>Yes. It exposes normalized deal data, categories, scoring, stats and attribution for apps, newsletters and AI agents.</dd>
         </dl>
       </article>
     </main>

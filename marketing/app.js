@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
       message.textContent = service.detail(data);
     } catch {
       element.classList.add("unavailable");
-      message.textContent = "Waking on first marketplace request";
+      message.textContent = "Live status refreshing";
     }
   });
 });

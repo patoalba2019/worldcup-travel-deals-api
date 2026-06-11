@@ -13,9 +13,8 @@
 [View product details](https://patoapis-paid-apis.onrender.com/world-cup-travel-api.html?utm_source=github&utm_medium=repository&utm_campaign=worldcup_readme) |
 [Live Demo](https://patoapis-paid-apis.onrender.com/)
 
-> Commercial API access is paid and delivered through RapidAPI. The direct
-> production backend rejects requests that do not carry the private marketplace
-> gateway credential.
+> Commercial API access is paid and delivered through RapidAPI with
+> marketplace-managed credentials.
 
 ## 🎯 Why WorldCupTravelDealsAPI?
 
@@ -23,7 +22,7 @@
 
 WorldCupTravelDealsAPI is a professional travel-intelligence API for FIFA World Cup 2026 tourism products. It helps travel agencies, deal newsletters, no-code builders, AI agents, and event-tourism apps discover host-city opportunities, build safe booking routes, compare packages, and score whether a flight + hotel offer is actually attractive.
 
-The API is designed to be safe and sellable on RapidAPI: ticket links point to official FIFA channels, travel searches are structured as outbound provider searches, and every response clearly discloses that the current version does not return live flight, hotel, or ticket inventory.
+The API is designed to be safe and sellable on RapidAPI: ticket links point to official FIFA channels, travel searches are structured as outbound provider searches, and deal scoring is built for real offers supplied by the buyer or agency workflow.
 
 **Perfect for:**
 - Travel agencies and tour operators
@@ -64,12 +63,10 @@ The API is designed to be safe and sellable on RapidAPI: ticket links point to o
 curl "https://your-domain.example/deals/search?origin=EZE&city=miami&start=2026-06-15&nights=5&travelers=2"
 ```
 
-## Inventory Disclosure
+## Offer-Scoring Model
 
 The current version provides structured planning data, provider search links,
-heuristic reference estimates, and scoring for real offers supplied by the
-buyer. It does **not** return live flight fares, hotel availability, or ticket
-inventory.
+reference estimates, and scoring for real offers supplied by the buyer.
 
 Responses include an `inventory_disclosure` object and mark generated package
 candidates with `is_live_offer: false`. Provider integrations can be added in a
@@ -84,7 +81,8 @@ REQUIRE_PAID_GATEWAY=true
 PAID_GATEWAY_SECRET=<strong-shared-secret>
 ```
 
-Then configure RapidAPI to send the same value as `X-RapidAPI-Proxy-Secret` or `X-API-Gateway-Secret`. Direct backend calls without that secret receive `402 Payment Required`.
+Then configure RapidAPI to send the same value as `X-RapidAPI-Proxy-Secret` or
+`X-API-Gateway-Secret` so production requests use marketplace credentials.
 
 For deployments managed from version control, set
 `PAID_GATEWAY_SECRET_HASHES=<sha256-of-shared-secret>` instead. RapidAPI keeps
@@ -100,6 +98,9 @@ non-reversible fingerprint.
 - **Mega**: $79/month - 200,000 requests/month
 
 [Subscribe on RapidAPI](https://rapidapi.com/patoalba2019/api/worldcuptraveldealsapi)
+
+Every plan is paid and production access is controlled through marketplace
+gateway credentials.
 
 ## 📊 Use Cases
 

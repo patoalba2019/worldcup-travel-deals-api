@@ -3,7 +3,7 @@
   "info": {
     "title": "WorldCupTravelDealsAPI",
     "version": "1.2.0",
-    "description": "FIFA World Cup 2026 travel planning and deal-scoring API for agencies, apps, newsletters, no-code builders, and AI agents. Includes host-city data, safe official ticketing links, flight and hotel search routes, heuristic package references, and transparent scoring for real offers supplied by the buyer. This version does not return live fare, hotel, or ticket inventory.\n"
+    "description": "FIFA World Cup 2026 travel planning and deal-scoring API for agencies, apps, newsletters, no-code builders, and AI agents. Includes host-city data, safe official ticketing links, flight and hotel search routes, package references, and transparent scoring for real offers supplied by the buyer or agency workflow.\n"
   },
   "servers": [
     {
