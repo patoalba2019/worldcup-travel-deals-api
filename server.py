@@ -563,7 +563,15 @@ def health():
             "api": API_NAME,
             "version": API_VERSION,
             "host_city_count": len(HOST_CITIES),
-            "inventory_disclosure": inventory_disclosure(),
+            "paid_gateway_required": os.getenv("REQUIRE_PAID_GATEWAY", "true").lower()
+            in {"1", "true", "yes"},
+            "product_data_access": "paid_marketplace_gateway_required",
+            "capabilities": [
+                "host_city_coverage",
+                "official_ticketing_links",
+                "travel_provider_search_routes",
+                "offer_scoring",
+            ],
             "generated_at": datetime.now(UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
         }
     )

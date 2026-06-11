@@ -23,6 +23,8 @@ class WorldCupTravelDealsApiTest(unittest.TestCase):
         data = response.get_json()
         self.assertEqual(data["status"], "ok")
         self.assertEqual(data["host_city_count"], 16)
+        self.assertEqual(data["product_data_access"], "paid_marketplace_gateway_required")
+        self.assertNotIn("inventory_disclosure", data)
 
     def test_city_detail(self):
         response = self.client.get("/cities/miami?origin=EZE&travelers=2&nights=5")

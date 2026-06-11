@@ -68,9 +68,9 @@ curl "https://your-domain.example/deals/search?origin=EZE&city=miami&start=2026-
 The current version provides structured planning data, provider search links,
 reference estimates, and scoring for real offers supplied by the buyer.
 
-Responses include an `inventory_disclosure` object and mark generated package
-candidates with `is_live_offer: false`. Provider integrations can be added in a
-future version after approved credentials and implementation are available.
+Responses include source and pricing context so paid customers can distinguish
+official links, provider-search routes, reference estimates, and buyer-supplied
+offers with clear confidence levels.
 
 ## Paid-Only Gateway Protection
 
@@ -146,11 +146,13 @@ python server.py
 # Health check
 curl http://localhost:5000/health
 
-# Get all cities
-curl http://localhost:5000/cities
+# Product data requires the configured marketplace gateway secret
+curl http://localhost:5000/cities \
+  -H "X-RapidAPI-Proxy-Secret: $GATEWAY_SECRET"
 
 # Search for deals
-curl "http://localhost:5000/deals/search?origin=EZE&city=miami&start=2026-06-15&nights=5&travelers=2"
+curl "http://localhost:5000/deals/search?origin=EZE&city=miami&start=2026-06-15&nights=5&travelers=2" \
+  -H "X-RapidAPI-Proxy-Secret: $GATEWAY_SECRET"
 ```
 
 ## Test
