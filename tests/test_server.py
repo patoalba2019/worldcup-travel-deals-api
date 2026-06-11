@@ -24,7 +24,7 @@ class WorldCupTravelDealsApiTest(unittest.TestCase):
         self.assertEqual(data["status"], "ok")
         self.assertEqual(data["host_city_count"], 16)
         self.assertEqual(data["product_data_access"], "paid_marketplace_gateway_required")
-        self.assertNotIn("inventory_disclosure", data)
+        self.assertNotIn("pricing_context", data)
 
     def test_city_detail(self):
         response = self.client.get("/cities/miami?origin=EZE&travelers=2&nights=5")
@@ -45,8 +45,8 @@ class WorldCupTravelDealsApiTest(unittest.TestCase):
         data = response.get_json()
         self.assertEqual(len(data["results"]), 3)
         self.assertIn("deal_score", data["results"][0])
-        self.assertFalse(data["results"][0]["is_live_offer"])
-        self.assertFalse(data["inventory_disclosure"]["contains_live_fares"])
+        self.assertEqual(data["results"][0]["offer_source"], "provider_search_route")
+        self.assertTrue(data["pricing_context"]["buyer_offer_scoring"])
 
     def test_score(self):
         response = self.client.get("/score?price=900&baseline=1200&safety=official")

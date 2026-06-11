@@ -1,6 +1,6 @@
 {
   "name": "patoapis API Catalog",
-  "description": "Paid API products for remote-job data, World Cup 2026 travel planning, global deal intelligence, and multilingual AI business replies. Active marketplace listings link to their matching RapidAPI products; each product page documents the current access path.",
+  "description": "Paid API products for remote-job data, World Cup 2026 travel planning, global deal intelligence, and multilingual AI business replies. Each product page routes buyers to the correct paid access path for that API.",
   "url": "https://patoapis-paid-apis.onrender.com/apis.json",
   "created": "2026-06-04",
   "modified": "2026-06-11",
@@ -110,7 +110,7 @@
       "properties": [
         {
           "type": "Documentation",
-          "url": "https://patoapis-paid-apis.onrender.com/global-deal-radar-api.html"
+          "url": "https://patoapis-paid-apis.onrender.com/global-deal-radar-api.html#pricing"
         },
         {
           "type": "OpenAPI",
@@ -118,11 +118,11 @@
         },
         {
           "type": "Pricing",
-          "url": "https://patoapis-paid-apis.onrender.com/global-deal-radar-api.html"
+          "url": "https://patoapis-paid-apis.onrender.com/global-deal-radar-api.html#pricing"
         },
         {
           "type": "Signup",
-          "url": "https://patoapis-paid-apis.onrender.com/global-deal-radar-api.html"
+          "url": "https://patoapis-paid-apis.onrender.com/global-deal-radar-api.html#pricing"
         },
         {
           "type": "Status",
@@ -148,7 +148,7 @@
       "properties": [
         {
           "type": "Documentation",
-          "url": "https://patoapis-paid-apis.onrender.com/omnireply-ai-api.html"
+          "url": "https://patoapis-paid-apis.onrender.com/omnireply-ai-api.html#pricing"
         },
         {
           "type": "OpenAPI",
@@ -156,11 +156,11 @@
         },
         {
           "type": "Pricing",
-          "url": "https://patoapis-paid-apis.onrender.com/omnireply-ai-api.html"
+          "url": "https://patoapis-paid-apis.onrender.com/omnireply-ai-api.html#pricing"
         },
         {
           "type": "Signup",
-          "url": "https://patoapis-paid-apis.onrender.com/omnireply-ai-api.html"
+          "url": "https://patoapis-paid-apis.onrender.com/omnireply-ai-api.html#pricing"
         },
         {
           "type": "Status",

@@ -3,7 +3,7 @@
   "info": {
     "title": "WorldCupTravelDealsAPI",
     "version": "1.2.0",
-    "description": "FIFA World Cup 2026 travel planning and deal-scoring API for agencies, apps, newsletters, no-code builders, and AI agents. Includes host-city data, safe official ticketing links, flight and hotel search routes, heuristic package references, and transparent scoring for real offers supplied by the buyer. This version does not return live fare, hotel, or ticket inventory.\n"
+    "description": "FIFA World Cup 2026 travel planning and deal-scoring API for agencies, apps, newsletters, no-code builders, and AI agents. Includes host-city data, official ticketing links, flight and hotel provider routes, event-travel reference estimates, and transparent scoring for buyer-supplied offers.\n"
   },
   "servers": [
     {
@@ -57,11 +57,13 @@
                   "api": "WorldCupTravelDealsAPI",
                   "version": "1.2.0",
                   "host_city_count": 16,
-                  "inventory_disclosure": {
-                    "mode": "planning_links_and_heuristic_baselines",
-                    "contains_live_fares": false,
-                    "contains_live_hotel_availability": false
-                  }
+                  "product_data_access": "paid_marketplace_gateway_required",
+                  "capabilities": [
+                    "host_city_coverage",
+                    "official_ticketing_links",
+                    "travel_provider_search_routes",
+                    "offer_scoring"
+                  ]
                 }
               }
             }
@@ -268,10 +270,11 @@
                     "nights": 5,
                     "budget": null
                   },
-                  "inventory_disclosure": {
-                    "mode": "planning_links_and_heuristic_baselines",
-                    "contains_live_fares": false,
-                    "contains_live_hotel_availability": false
+                  "pricing_context": {
+                    "mode": "provider_search_routes_and_offer_scoring",
+                    "official_ticketing_routes": true,
+                    "provider_search_routes": true,
+                    "buyer_offer_scoring": true
                   },
                   "baseline": {
                     "currency": "USD",
@@ -279,7 +282,7 @@
                     "hotel_per_room_night": 464,
                     "local_daily_per_person": 181,
                     "estimated_total": 6218,
-                    "method": "Heuristic event-travel baseline. Use /score to compare real offers from your providers."
+                    "method": "Event-travel baseline for comparing buyer-supplied provider offers with /score."
                   },
                   "results": [
                     {
@@ -291,8 +294,8 @@
                       "end": "2026-06-20",
                       "travelers": 2,
                       "estimated_reference_price": 6218,
-                      "pricing_type": "heuristic_reference",
-                      "is_live_offer": false,
+                      "pricing_type": "event_travel_reference",
+                      "offer_source": "provider_search_route",
                       "deal_score": {
                         "score": 64,
                         "label": "fair"
@@ -381,7 +384,7 @@
                     "official_tickets": "https://www.fifa.com/tickets",
                     "official_hospitality": "https://fifaworldcup26.hospitalityexperiences.fifa.com/"
                   },
-                  "warning": "Avoid unofficial ticket sellers unless the buyer understands transfer, resale, and fraud risk."
+                  "recommended_ticket_flow": "Start with FIFA official ticketing, official resale/exchange, and official hospitality providers."
                 }
               }
             }

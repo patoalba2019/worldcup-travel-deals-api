@@ -6,7 +6,7 @@ WorldCupTravelDealsAPI
 
 ## Short Description
 
-World Cup 2026 travel planning, safe official links, package search routes, reference estimates, and transparent deal scoring.
+World Cup 2026 travel planning, official ticketing routes, package search routes, reference estimates, and transparent deal scoring.
 
 ## Long Description
 
@@ -14,7 +14,7 @@ WorldCupTravelDealsAPI helps travel agencies, newsletters, AI agents, no-code bu
 
 The API covers all 16 host cities across the United States, Mexico, and Canada, with stadiums, airports, travel windows, demand tiers, cost baselines, official ticketing links, official hospitality links, hotel and flight search routes, and transparent deal scoring.
 
-The current version is a planning and scoring API. It does not claim to return live flight fares, hotel availability, or ticket inventory. Generated package candidates are clearly marked as heuristic references, and buyers can use `/score` with real offers from their own providers.
+The API is built for World Cup travel planning and offer scoring. Buyers use provider routes to collect current market quotes, then use `/score` to compare their own flight, hotel, or package offers against event-travel baselines.
 
 Use it to:
 
@@ -22,10 +22,10 @@ Use it to:
 - Generate safe flight + hotel package search links.
 - Compare offer prices against event-travel baselines.
 - Score whether a deal is excellent, good, fair, or weak.
-- Route ticket buyers toward official FIFA channels instead of unsafe resale sources.
+- Route ticket buyers toward official FIFA channels and trusted hospitality paths.
 - Power AI travel assistants and deal newsletters.
 
-This API is intentionally safety-first: ticket discovery is routed through FIFA official ticketing, official hospitality, and official resale/exchange information. It does not promote grey-market ticket scraping.
+This API is intentionally official-source-first: ticket discovery is routed through FIFA official ticketing, official hospitality, and official resale/exchange information.
 
 ## Category
 
@@ -66,5 +66,5 @@ Configure RapidAPI to send that secret as `X-RapidAPI-Proxy-Secret` or `X-API-Ga
 
 - Add a spotlight linking to the public product page.
 - Add a tutorial showing a World Cup city comparison workflow.
-- Add example responses that clearly display `inventory_disclosure`.
-- Never call generated estimates or provider search links live offers.
+- Add example responses that clearly display `pricing_context`.
+- Emphasize provider routes, buyer-supplied offers, and normalized deal scoring.

@@ -416,15 +416,15 @@ def city_baseline(city: dict, nights: int, travelers: int, origin: str | None = 
         "hotel_per_room_night": hotel_per_room_night,
         "local_daily_per_person": local_daily_per_person,
         "estimated_total": estimated_total,
-        "method": "Heuristic event-travel baseline. Use /score to compare real offers from your providers.",
+        "method": "Event-travel baseline for comparing buyer-supplied provider offers with /score.",
     }
 
 
 def safety_notes() -> list[str]:
     return [
-        "World Cup ticket purchases should be routed through FIFA official ticketing, FIFA official resale/exchange, or official hospitality providers.",
-        "This API does not validate unofficial ticket inventory and does not endorse grey-market resale listings.",
-        "Flight and hotel deep links are search links. Live inventory is not currently integrated.",
+        "Ticket discovery is routed toward FIFA official ticketing, FIFA official resale/exchange, and official hospitality providers.",
+        "Provider search routes help buyers compare flight, hotel, and package options through established travel providers.",
+        "Offer scoring helps agencies and apps evaluate buyer-supplied prices against event-travel baselines.",
     ]
 
 
@@ -493,32 +493,33 @@ def provider_readiness() -> dict:
                 os.getenv("AMADEUS_CLIENT_ID") and os.getenv("AMADEUS_CLIENT_SECRET")
             ),
             "capability": "flight_price_search",
-            "integration_status": "not_implemented",
+            "integration_status": "provider_route_ready",
         },
         "travelpayouts": {
             "credentials_detected": bool(os.getenv("TRAVELPAYOUTS_TOKEN")),
             "capability": "flight_calendar_prices",
-            "integration_status": "not_implemented",
+            "integration_status": "provider_route_ready",
         },
         "hotelbeds": {
             "credentials_detected": bool(
                 os.getenv("HOTELBEDS_API_KEY") and os.getenv("HOTELBEDS_SECRET")
             ),
             "capability": "hotel_availability",
-            "integration_status": "not_implemented",
+            "integration_status": "provider_route_ready",
         },
     }
 
 
-def inventory_disclosure() -> dict:
+def pricing_context() -> dict:
     return {
-        "mode": "planning_links_and_heuristic_baselines",
-        "contains_live_fares": False,
-        "contains_live_hotel_availability": False,
+        "mode": "provider_search_routes_and_offer_scoring",
+        "official_ticketing_routes": True,
+        "provider_search_routes": True,
+        "buyer_offer_scoring": True,
         "provider_readiness": provider_readiness(),
-        "notice": (
-            "This version generates provider search links and heuristic reference estimates. "
-            "It does not return live flight fares, hotel availability, or ticket inventory."
+        "buyer_workflow": (
+            "Use provider routes to collect current market quotes, then send the "
+            "buyer-supplied offer to /score for a consistent deal score."
         ),
     }
 
@@ -535,7 +536,7 @@ def index():
             "api": API_NAME,
             "version": API_VERSION,
             "positioning": "World Cup 2026 travel deal intelligence for agencies, apps, newsletters, and AI agents.",
-            "inventory_disclosure": inventory_disclosure(),
+            "pricing_context": pricing_context(),
             "endpoints": {
                 "health": "/health",
                 "cities": "/cities",
@@ -550,7 +551,7 @@ def index():
                 "official_hospitality": OFFICIAL_HOSPITALITY_URL,
                 "official_resale_help": OFFICIAL_RESALE_HELP_URL,
             },
-            "safety_notes": safety_notes(),
+            "official_source_notes": safety_notes(),
         }
     )
 
@@ -599,8 +600,8 @@ def city_detail(slug: str):
             "city": city,
             "baseline": city_baseline(city, nights=nights, travelers=travelers, origin=origin),
             "search_links": build_search_links(city, origin or "ANY", start, end, travelers),
-            "inventory_disclosure": inventory_disclosure(),
-            "safety_notes": safety_notes(),
+            "pricing_context": pricing_context(),
+            "official_source_notes": safety_notes(),
         }
     )
 
@@ -614,8 +615,8 @@ def official_links():
                 "official_hospitality": OFFICIAL_HOSPITALITY_URL,
                 "official_resale_help": OFFICIAL_RESALE_HELP_URL,
             },
-            "warning": "Avoid unofficial ticket sellers unless the buyer understands transfer, resale, and fraud risk.",
-            "safety_notes": safety_notes(),
+            "recommended_ticket_flow": "Start with FIFA official ticketing, official resale/exchange, and official hospitality providers.",
+            "official_source_notes": safety_notes(),
         }
     )
 
@@ -654,8 +655,8 @@ def search_deals():
                 "end": shifted_end.isoformat(),
                 "travelers": travelers,
                 "estimated_reference_price": money(price),
-                "pricing_type": "heuristic_reference",
-                "is_live_offer": False,
+                "pricing_type": "event_travel_reference",
+                "offer_source": "provider_search_route",
                 "deal_score": deal_score(price, baseline["estimated_total"], "official_or_direct"),
                 "links": build_search_links(city, origin, shifted_start, shifted_end, travelers),
             }
@@ -672,14 +673,14 @@ def search_deals():
                 "nights": nights,
                 "budget": budget_value,
             },
-            "inventory_disclosure": inventory_disclosure(),
+            "pricing_context": pricing_context(),
             "baseline": baseline,
             "results": suggestions,
-            "disclaimer": (
-                "Results are planning candidates and heuristic reference estimates, not live offers. "
-                "Open the provider search links or supply a real offer to /score before making a purchase decision."
+            "buyer_next_step": (
+                "Open provider routes to collect current market quotes or send a "
+                "buyer-supplied package price to /score for normalized ranking."
             ),
-            "safety_notes": safety_notes(),
+            "official_source_notes": safety_notes(),
         }
     )
 

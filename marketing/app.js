@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     globaldeals: {
       url: "https://global-deal-radar-api.onrender.com/health",
-      detail: (data) => `${data.cache?.deal_count ?? "Live"} deal signals ready`,
+      detail: (data) => `${data.deal_signal_count ?? data.cache?.deal_count ?? "Live"} deal signals ready`,
     },
     omnireply: {
       url: "https://worldcup-travel-deals-api.onrender.com/omni/health",
@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
       message.textContent = service.detail(data);
     } catch {
       element.classList.add("unavailable");
-      message.textContent = "Live status refreshing";
+      message.textContent = "Production status updating";
     }
   });
 });
